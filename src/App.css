@@ -1,0 +1,53 @@
+/* 🔹 Scroll elegante morado (Clase específica) */
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #7c3aed; /* morado base (violet-600) */
+  border-radius: 10px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa; /* morado claro en hover (violet-400) */
+}
+
+/* Firefox */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #7c3aed transparent;
+}
+
+/* 🔹 Scroll elegante global de la aplicación (Gradiante Premium) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    rgba(124, 58, 237, 0.5),  /* Morado translúcido */
+    rgba(79, 70, 229, 0.6)   /* Índigo translúcido */
+  );
+  border-radius: 999px;
+  border: 2px solid transparent; /* Efecto padding visual dentro del contenedor */
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(139, 92, 246, 0.8),  /* Violeta más vivo en hover */
+    rgba(99, 102, 241, 0.9)   /* Índigo más vivo en hover */
+  );
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
