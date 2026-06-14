@@ -12,10 +12,8 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
     imagen: null
   });
 
-  // Estado para las mini notificaciones flotantes (Toasts)
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '', tipo: 'info' });
 
-  // Auto-cerrar la notificación después de 4 segundos
   useEffect(() => {
     if (notificacion.visible) {
       const timer = setTimeout(() => {
@@ -42,7 +40,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de seguridad visual por código
     if (
       !form.nombre ||
       !form.descripcion ||
@@ -55,16 +52,8 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
       return;
     }
 
-    /* NOTA DE MAQUETACIÓN:
-       Se eliminó la lectura/escritura en localStorage y el callback 'onSubmit'.
-       Los datos del nuevo servicio no se persistirán en ningún sitio, manteniendo el componente
-       estrictamente enfocado en la interfaz de usuario.
-    */
-
-    // Simulación visual de éxito en el registro
     mostrarToast("Servicio registrado correctamente (Simulación)", "success");
 
-    // Limpieza de los campos del formulario
     setForm({
       nombre: "",
       descripcion: "",
@@ -75,7 +64,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
       imagen: null
     });
 
-    // Retraso controlado para que el usuario aprecie el Toast de éxito antes de cerrar el modal
     setTimeout(() => {
       onClose();
     }, 1000);
@@ -83,8 +71,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-      
-      {/* NOTIFICACIÓN FLOTANTE (TOAST) */}
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-2xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' ? 'bg-purple-500/10 border-purple-500/30 text-purple-600 dark:text-purple-400' :
@@ -119,10 +105,8 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
           shadow-2xl
         "
       >
-        {/* Barra decorativa superior */}
         <div className="h-2 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-700" />
 
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-purple-500/10 px-6 py-5 shrink-0">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -142,7 +126,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
           </button>
         </div>
 
-        {/* Formulario con Scroll Interno */}
         <form
           onSubmit={handleSubmit}
           className="
@@ -155,7 +138,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             scrollbar-track-transparent
           "
         >
-          {/* Nombre */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2 flex items-center gap-2">
               <Tag size={16} className="text-purple-600 dark:text-purple-400" />
@@ -172,7 +154,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             />
           </div>
 
-          {/* Precio y duración */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2 flex items-center gap-2">
@@ -218,7 +199,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             </div>
           </div>
 
-          {/* Imagen (Opcional) */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2 flex items-center gap-2">
               <ImageIcon size={16} className="text-purple-600 dark:text-purple-400" />
@@ -233,7 +213,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             />
           </div>
 
-          {/* Categoría y Estado */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2 flex items-center gap-2">
@@ -274,7 +253,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             </div>
           </div>
 
-          {/* Descripción */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-gray-300 mb-2 flex items-center gap-2">
               <FileText size={16} className="text-purple-600 dark:text-purple-400" />
@@ -291,7 +269,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
             />
           </div>
 
-          {/* Botón de Enviar */}
           <button
             type="submit"
             className="w-full shrink-0 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-600 p-4 font-bold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-purple-500/20 flex items-center justify-center gap-2"
@@ -301,7 +278,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
           </button>
         </form>
 
-        {/* Barra inferior decorativa */}
         <div className="h-2 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-700" />
       </div>
     </div>

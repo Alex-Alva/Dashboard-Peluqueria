@@ -1,18 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  LayoutDashboard,
-  ShoppingCart,
-  Scissors,
-  Package,
-  Users,
-  Calendar,
-  History,
-  DollarSign,
-  Settings,
-  Sun,
-  Moon,
-  LogOut
+  LayoutDashboard,ShoppingCart,Scissors,Package,Users,Calendar, History,DollarSign,Settings,Sun, Moon,LogOut
 } from "lucide-react";
 import logo1 from "../assets/Logo1.png";
 import logo2 from "../assets/Logo2.png";
@@ -38,7 +27,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   const [openMenu, setOpenMenu] = useState(null);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  // ✅ CORREGIDO: Inicialización síncrona para evitar el parpadeo claro/oscuro
   const [dark, setDark] = useState(() => {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") {
@@ -49,8 +37,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       return false;
     }
   });
-
-  // El useEffect ahora queda libre de la carga inicial, previniendo micro-renders extras
   useEffect(() => {
     const saved = localStorage.getItem("theme");
     const esOscuro = saved === "dark";
@@ -61,14 +47,13 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   return (
     <motion.div
       animate={{ width: isOpen ? 220 : 70 }}
-      transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }} // Animación más ágil
+      transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
       className={`fixed top-0 left-0 h-screen flex flex-col z-50 border-r select-none
         ${dark 
           ? "bg-[#121016] text-zinc-200 border-purple-950/40" 
           : "bg-[#f4f6f9] text-slate-800 border-slate-200"
         }`}
     >
-      {/* Logo e Identidad */}
       <div
         className="flex items-center gap-3 p-4 cursor-pointer border-b border-slate-200/60 dark:border-purple-950/50"
         onClick={() => setIsOpen(!isOpen)}
@@ -84,8 +69,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           </span>
         )}
       </div>
-
-      {/* Menú de Navegación */}
       <div className="flex-1 overflow-y-auto py-3 space-y-1 scrollbar-none">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
@@ -156,8 +139,6 @@ export default function Sidebar({ isOpen, setIsOpen }) {
           );
         })}
       </div>
-
-      {/* Selector de Tema y Logout al pie */}
       <div className="p-2 border-t border-slate-200/60 dark:border-purple-950/50 space-y-1">
         <div
           className={`flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer text-sm font-medium transition-all duration-200

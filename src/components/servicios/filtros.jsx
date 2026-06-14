@@ -25,7 +25,6 @@ const FilterBar = ({ filters, setFilters }) => {
                     border-x border-b border-purple-500/20
                     transition-colors duration-200">
 
-      {/* BUSCADOR */}
       <div className="relative flex-grow max-w-xs min-w-[240px]">
         <label className={labelClasses}>Buscar</label>
         <span className="absolute left-3.5 top-[39px] text-slate-400 dark:text-purple-500/40 pointer-events-none">
@@ -40,7 +39,6 @@ const FilterBar = ({ filters, setFilters }) => {
         />
       </div>
 
-      {/* DURACIÓN */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[140px]">
         <label className={labelClasses}>Duración</label>
         <span className="absolute left-3.5 top-[39px] text-slate-400 dark:text-purple-500/40 pointer-events-none">
@@ -62,7 +60,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </span>
       </div>
 
-      {/* PRECIO */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[150px]">
         <label className={labelClasses}>Precio</label>
         <span className="absolute left-3.5 top-[39px] text-slate-400 dark:text-purple-500/40 pointer-events-none">
@@ -84,7 +81,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </span>
       </div>
 
-      {/* ESTADO */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[130px]">
         <label className={labelClasses}>Estado</label>
         <span className="absolute left-3.5 top-[39px] text-slate-400 dark:text-purple-500/40 pointer-events-none">
@@ -104,7 +100,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </span>
       </div>
 
-      {/* LIMPIAR FILTROS */}
       <button 
         onClick={() => setFilters({ nombre: '', duracion: '', precio: '', estado: '' })}
         className="flex items-center justify-center gap-2 px-5 py-3 border border-purple-500/30 rounded-xl text-sm font-bold text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 active:scale-95 transition-all ml-auto w-full sm:w-auto"

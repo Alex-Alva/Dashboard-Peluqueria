@@ -15,7 +15,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
   const [imagenUrlPrevia, setImagenUrlPrevia] = useState(""); 
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '', tipo: 'info' });
 
-  // Calcular ganancia en tiempo real
   const gananciaCalculada = form.precio && form.costo 
     ? (Number(form.precio) - Number(form.costo)).toFixed(2)
     : "0.00";
@@ -108,7 +107,7 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      {/* Toast Notificación */}
+
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-2xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500' :
@@ -127,10 +126,7 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
         </div> 
       )}
 
-      {/* Contenedor Modal */}
       <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden rounded-3xl border border-slate-200 dark:border-purple-950/40 bg-white dark:bg-[#121016]/95 dark:backdrop-blur-md shadow-2xl text-slate-900 dark:text-slate-300">
-        
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-purple-950/40 bg-slate-50/50 dark:bg-[#121016]/60 px-6 py-5 shrink-0">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -152,12 +148,10 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
           </button> 
         </div>
 
-        {/* Formulario */}
         <form
           onSubmit={handleSubmit}
           className="flex-1 overflow-y-auto p-6 space-y-5 scrollbar-thin scrollbar-thumb-purple-600/40 scrollbar-track-transparent bg-white dark:bg-transparent"
         >
-          {/* Nombre */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <Tag size={16} className="text-purple-600 dark:text-purple-500" />
@@ -173,8 +167,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
               className="w-full rounded-2xl border border-slate-200 dark:border-purple-950/40 bg-slate-50 dark:bg-[#121016]/40 p-4 text-slate-900 dark:text-white outline-none transition focus:border-purple-600 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10"
             />
           </div>
-
-          {/* Costo, Precio y Stock */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
@@ -231,7 +223,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
             </div>  
           </div>
 
-          {/* Ganancia Calculada (Solo Lectura) */}
           <div className="rounded-2xl border-2 border-dashed border-emerald-500/30 bg-emerald-500/5 dark:bg-emerald-500/10 p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -251,7 +242,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
             </p>
           </div>
 
-          {/* Imagen */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <ImageIcon size={16} className="text-purple-600 dark:text-purple-500" />
@@ -295,7 +285,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
             )} 
           </div>
 
-          {/* Categoría */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <Layers size={16} className="text-purple-600 dark:text-purple-500" />
@@ -323,7 +312,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
             </select>
           </div>
 
-          {/* Descripción */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <FileText size={16} className="text-purple-600 dark:text-purple-500" />
@@ -340,7 +328,6 @@ export default function FormularioEditar({ isOpen, onClose, product, onSubmit, c
             />
           </div>
 
-          {/* Botón de envío (Efecto neón) */}
           <button
             type="submit"
             className="w-full shrink-0 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-600 p-4 font-bold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-indigo-500/20 flex items-center justify-center gap-2"

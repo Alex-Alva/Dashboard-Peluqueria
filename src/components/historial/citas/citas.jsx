@@ -104,8 +104,6 @@ export default function Citas() {
     if (!contieneTexto(nombreCliente, busquedaCliente)) {
       return false;
     }
-
-    // Filtro de rango de fechas con utilidad robusta
     if (!estaEnRangoFechas(c.fecha, fechaInicio, fechaFin)) return false;
 
     return true;
@@ -113,16 +111,12 @@ export default function Citas() {
 
   return (
     <div className="p-6 bg-white dark:bg-transparent transition-colors text-slate-600 dark:text-purple-100/80 animate-fadeIn">
-      
-      {/* SECCIÓN DE FILTROS SUPERIORES */}
       <div className="mb-6 p-4 bg-slate-50 dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm flex flex-wrap gap-6 items-center">
         
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-purple-400/50">
           <Filter size={14} className="text-purple-600 dark:text-purple-400" />
           Auditoría de Citas:
         </div>
-
-        {/* Buscador de Cliente */}
         <div className="flex items-center gap-2 text-xs bg-white dark:bg-[#121016]/60 border border-slate-200 dark:border-purple-950/60 px-3 py-1.5 rounded-sm w-full sm:w-64">
           <Search size={14} className="opacity-40 text-slate-400 dark:text-purple-400" />
           <input 
@@ -133,8 +127,6 @@ export default function Citas() {
             className="bg-transparent outline-none w-full text-slate-900 dark:text-white font-light"
           />
         </div>
-
-        {/* Rango de Fechas */}
         <div className="flex items-center gap-2 text-xs font-light">
           <Calendar size={14} className="opacity-50 text-purple-600 dark:text-purple-400" />
           <input 
@@ -151,8 +143,6 @@ export default function Citas() {
             className="bg-transparent border-b border-slate-300 dark:border-purple-950/60 pb-0.5 outline-none focus:border-purple-600 dark:focus:border-purple-500 text-slate-900 dark:text-white"
           />
         </div>
-
-        {/* Selector de Estado */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-light">
           <span className="opacity-50">Estado:</span>
           <select 
@@ -165,8 +155,6 @@ export default function Citas() {
             <option value="Cancelada">Cancelada</option>
           </select>
         </div>
-
-        {/* Botón Limpiar Filtros */}
         {(busquedaCliente || fechaInicio || fechaFin || filtroEstado !== 'Todos') && (
           <button 
             onClick={() => { setBusquedaCliente(''); setFechaInicio(''); setFechaFin(''); setFiltroEstado('Todos'); }}
@@ -176,8 +164,6 @@ export default function Citas() {
           </button>
         )}
       </div>
-
-      {/* TABLA PRINCIPAL DE CITAS PROCESADAS */}
       <div className="border border-slate-200 dark:border-purple-950/40 rounded-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -206,12 +192,9 @@ export default function Citas() {
             ) : (
               citasFiltradas.map((c) => (
                 <tr key={c.id} className="hover:bg-slate-50/50 dark:hover:bg-purple-950/10 transition-colors">
-                  {/* Cliente */}
                   <td className="p-4 font-medium text-slate-900 dark:text-white text-xs">
                     {c.clientes?.nombre || 'Cliente General'}
                   </td>
-                  
-                  {/* Tratamiento / Servicio */}
                   <td className="p-4 text-xs tracking-wide">
                     <span className="font-light text-slate-800 dark:text-purple-100">
                       {c.servicio?.nombre || 'Servicio Desconocido'}
@@ -222,23 +205,15 @@ export default function Citas() {
                       </span>
                     )}
                   </td>
-                  
-                  {/* Planificación (Fecha y Hora) */}
                   <td className="p-4 text-xs font-light">
                     {formatFechaLocal(c.fecha, { includeTime: false })} a las <span className="font-normal">{formatHora(c.hora_inicio)}</span>
                   </td>
-
-                  {/* Duración */}
                   <td className="p-4 text-xs font-light opacity-70">
                     {c.duracion_minutos || 0} min
                   </td>
-                  
-                  {/* Costo / Precio */}
                   <td className="p-4 text-right text-purple-700 dark:text-purple-400 font-semibold">
                     {formatMoneda(c.precio)}
                   </td>
-                  
-                  {/* Flujo / Estado Badge */}
                   <td className="p-4 text-center">
                     <span className={`px-2.5 py-0.5 text-[9px] uppercase font-medium rounded-sm tracking-wider ${
                       c.estado === 'Realizada' 
@@ -254,7 +229,6 @@ export default function Citas() {
           </tbody>
         </table>
       </div>
-
     </div>
   );
 }

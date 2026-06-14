@@ -4,15 +4,15 @@ import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 const styles = StyleSheet.create({
   page: {
     padding: 40,
-    backgroundColor: '#FFFFFF', // Fondo blanco puro para el PDF
+    backgroundColor: '#FFFFFF',
     fontFamily: 'Helvetica',
-    color: '#334155', // slate-700 para texto principal
+    color: '#334155', 
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 2,
-    borderBottomColor: '#7C3AED', // purple-600
+    borderBottomColor: '#7C3AED',
     paddingBottom: 18,
     marginBottom: 25,
   },
@@ -21,18 +21,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 1.5,
     textTransform: 'uppercase',
-    color: '#581C87', // purple-900
+    color: '#581C87',
   },
   companyDetails: {
     fontSize: 9,
-    color: '#64748B', // slate-500
+    color: '#64748B',
     marginTop: 4,
     lineHeight: 1.3,
   },
   receiptCard: {
     borderWidth: 2,
-    borderColor: '#7C3AED', // purple-600
-    backgroundColor: '#F5F3FF', // purple-50
+    borderColor: '#7C3AED',
+    backgroundColor: '#F5F3FF',
     borderRadius: 6,
     padding: 12,
     textAlign: 'center',
@@ -43,45 +43,45 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    color: '#581C87', // purple-900
+    color: '#581C87',
   },
   receiptNumber: {
     fontSize: 12,
     marginTop: 5,
     fontWeight: 'bold',
-    color: '#6366F1', // indigo-500
+    color: '#6366F1',
   },
   metaText: {
     fontSize: 9,
-    color: '#7C3AED', // purple-600
+    color: '#7C3AED',
     marginTop: 4,
   },
   sectionTitle: {
     fontSize: 9,
     textTransform: 'uppercase',
     letterSpacing: 1,
-    color: '#7C3AED', // purple-600
+    color: '#7C3AED',
     marginBottom: 6,
     fontWeight: 'bold',
   },
   clientBox: {
     marginBottom: 25,
-    backgroundColor: '#F8FAFC', // slate-50
+    backgroundColor: '#F8FAFC',
     borderWidth: 1,
-    borderColor: '#E2E8F0', // slate-200
+    borderColor: '#E2E8F0',
     borderRadius: 6,
     padding: 12,
     borderLeftWidth: 4,
-    borderLeftColor: '#7C3AED', // purple-600
+    borderLeftColor: '#7C3AED',
   },
   clientText: {
     fontSize: 10,
     lineHeight: 1.4,
-    color: '#334155', // slate-700
+    color: '#334155',
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: '#7C3AED', // purple-600 sólido
+    backgroundColor: '#7C3AED',
     borderRadius: 4,
     padding: 7,
     color: '#FFFFFF',
@@ -93,16 +93,16 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0', // slate-200
+    borderBottomColor: '#E2E8F0',
     paddingVertical: 8,
     paddingHorizontal: 6,
     alignItems: 'center',
-    backgroundColor: '#FAFAFA', // Alternado muy sutil
+    backgroundColor: '#FAFAFA',
   },
-  colDesc: { flex: 3, fontSize: 10, color: '#0F172A' }, // slate-900
-  colCant: { flex: 1, textAlign: 'center', fontSize: 10, color: '#475569' }, // slate-600
-  colPrecio: { flex: 1, textAlign: 'right', fontSize: 10, color: '#475569' }, // slate-600
-  colSubtotal: { flex: 1, textAlign: 'right', fontSize: 10, color: '#581C87', fontWeight: 'bold' }, // purple-900
+  colDesc: { flex: 3, fontSize: 10, color: '#0F172A' },
+  colCant: { flex: 1, textAlign: 'center', fontSize: 10, color: '#475569' }, 
+  colPrecio: { flex: 1, textAlign: 'right', fontSize: 10, color: '#475569' },
+  colSubtotal: { flex: 1, textAlign: 'right', fontSize: 10, color: '#581C87', fontWeight: 'bold' },
   
   totalsContainer: {
     marginTop: 20,
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
   },
   totalsBox: {
     width: 210,
-    backgroundColor: '#F8FAFC', // slate-50
+    backgroundColor: '#F8FAFC',
     borderWidth: 2,
-    borderColor: '#7C3AED', // purple-600
+    borderColor: '#7C3AED',
     borderRadius: 6,
     padding: 10,
   },
@@ -122,31 +122,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 3,
   },
-  totalLabel: { fontSize: 10, color: '#64748B' }, // slate-500
-  totalValue: { fontSize: 10, textAlign: 'right', color: '#334155' }, // slate-700
+  totalLabel: { fontSize: 10, color: '#64748B' }, 
+  totalValue: { fontSize: 10, textAlign: 'right', color: '#334155' },
   
   cashDetailRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 2,
   },
-  cashDetailLabel: { fontSize: 9, color: '#7C3AED', fontStyle: 'italic' }, // purple-600
-  cashDetailValue: { fontSize: 9, textAlign: 'right', color: '#6366F1' }, // indigo-500
+  cashDetailLabel: { fontSize: 9, color: '#7C3AED', fontStyle: 'italic' },
+  cashDetailValue: { fontSize: 9, textAlign: 'right', color: '#6366F1' },
   
   grandTotalRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderTopWidth: 2,
-    borderTopColor: '#7C3AED', // purple-600
+    borderTopColor: '#7C3AED',
     paddingTop: 6,
     marginTop: 6,
     marginBottom: 4,
-    backgroundColor: '#F5F3FF', // purple-50
+    backgroundColor: '#F5F3FF', 
     paddingHorizontal: 6,
     borderRadius: 4,
   },
-  grandTotalLabel: { fontSize: 11, fontWeight: 'bold', color: '#581C87' }, // purple-900
-  grandTotalValue: { fontSize: 11, fontWeight: 'bold', color: '#6366F1' }, // indigo-500
+  grandTotalLabel: { fontSize: 11, fontWeight: 'bold', color: '#581C87' }, 
+  grandTotalValue: { fontSize: 11, fontWeight: 'bold', color: '#6366F1' }, 
   
   footer: {
     position: 'absolute',
@@ -155,17 +155,16 @@ const styles = StyleSheet.create({
     right: 40,
     textAlign: 'center',
     borderTopWidth: 1,
-    borderTopColor: '#E2E8F0', // slate-200
+    borderTopColor: '#E2E8F0',
     paddingTop: 12,
     fontSize: 8,
-    color: '#94A3B8', // slate-400
+    color: '#94A3B8',
     lineHeight: 1.4,
   },
   
-  // Estilos adicionales para degradados visuales (simulados con bordes)
   headerAccent: {
     height: 4,
-    backgroundColor: '#7C3AED', // Simula degradado purple-indigo
+    backgroundColor: '#7C3AED',
     marginBottom: 10,
     borderRadius: 2,
   }
@@ -176,11 +175,7 @@ export const BoletaPDF = ({ data }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        
-        {/* Barra decorativa superior con acento morado */}
         <View style={styles.headerAccent} />
-        
-        {/* Encabezado */}
         <View style={styles.header}>
           <View>
             <Text style={styles.brandName}>{data.nombreEmpresa || "Mi Negocio / Salon"}</Text>
@@ -196,7 +191,6 @@ export const BoletaPDF = ({ data }) => {
           </View>
         </View>
 
-        {/* Datos del Cliente */}
         <Text style={styles.sectionTitle}>Datos del Cliente</Text>
         <View style={styles.clientBox}>
           <Text style={styles.clientText}>
@@ -211,7 +205,6 @@ export const BoletaPDF = ({ data }) => {
           )}
         </View>
 
-        {/* Tabla de Detalles */}
         <View style={styles.tableHeader}>
           <Text style={styles.colDesc}>Descripción / Concepto</Text>
           <Text style={styles.colCant}>Cant.</Text>
@@ -228,7 +221,6 @@ export const BoletaPDF = ({ data }) => {
           </View>
         ))}
 
-        {/* Bloque de Totales */}
         <View style={styles.totalsContainer}>
           <View style={styles.totalsBox}>
             

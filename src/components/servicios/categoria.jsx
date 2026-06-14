@@ -23,7 +23,6 @@ const CategorySidebar = ({
       return JSON.parse(saved);
     }
 
-    // Inicializar sólo las estructuras base de las categorías
     const categoriasIniciales = [
       {
         id: null,
@@ -47,18 +46,13 @@ const CategorySidebar = ({
   const [editId, setEditId] = useState(null);
   const [originalName, setOriginalName] = useState('');
 
-  // ====================================================
-  // CÁLCULO EN TIEMPO REAL DE CANTIDADES POR CATEGORÍA
-  // ====================================================
   const categoriasConContador = useMemo(() => {
     return categorias.map(cat => {
       let cantidad = 0;
 
       if (cat.id === null) {
-        // Si es 'Todos', cuenta el total global de servicios
         cantidad = serviciosData.length;
       } else {
-        // Si es una categoría específica, filtra por su id
         cantidad = serviciosData.filter(
           service => service.categoria_id === cat.id
         ).length;
@@ -69,11 +63,7 @@ const CategorySidebar = ({
         cantidad
       };
     });
-  }, [categorias]); // Se recalcula si añades/editas categorías o si mutas serviciosData
-
-  // =========================
-  // GUARDAR LOCALSTORAGE
-  // =========================
+  }, [categorias]); 
   useEffect(() => {
     localStorage.setItem(
       STORAGE_KEY,
@@ -81,16 +71,10 @@ const CategorySidebar = ({
     );
   }, [categorias]);
 
-  // ===============================================
-  // ENVIAR AL PADRE (Pasamos los datos con contador)
-  // ===============================================
   useEffect(() => {
     onCategoriasLoad?.(categoriasConContador);
   }, [categoriasConContador, onCategoriasLoad]);
 
-  // =========================
-  // SELECCIONAR
-  // =========================
   const seleccionarCategoria = (id) => {
     const nuevasCategorias = categorias.map(cat => ({
       ...cat,
@@ -101,9 +85,6 @@ const CategorySidebar = ({
     onCategoriaChange?.(id);
   };
 
-  // =========================
-  // NUEVA CATEGORIA
-  // =========================
   const handleNew = () => {
     setShowForm(prev => !prev);
     setEditId(null);
@@ -112,9 +93,6 @@ const CategorySidebar = ({
     setMenuOpen(null);
   };
 
-  // =========================
-  // EDITAR
-  // =========================
   const handleEdit = (cat) => {
     setShowForm(true);
     setNewCat(cat.nombre);
@@ -123,9 +101,6 @@ const CategorySidebar = ({
     setMenuOpen(null);
   };
 
-  // =========================
-  // CANCELAR
-  // =========================
   const handleCancel = () => {
     setShowForm(false);
     setNewCat('');
@@ -133,14 +108,10 @@ const CategorySidebar = ({
     setOriginalName('');
   };
 
-  // =========================
-  // GUARDAR
-  // =========================
   const handleSave = () => {
     const nombreLimpio = newCat.trim();
     if (!nombreLimpio) return;
 
-    // EVITAR DUPLICADOS
     const existe = categorias.some(cat =>
       cat.nombre.toLowerCase() === nombreLimpio.toLowerCase() &&
       cat.id !== editId
@@ -148,7 +119,6 @@ const CategorySidebar = ({
 
     if (existe) return;
 
-    // EDITAR
     if (editId !== null) {
       const updated = categorias.map(cat =>
         cat.id === editId
@@ -157,7 +127,6 @@ const CategorySidebar = ({
       );
       setCategorias(updated);
     } else {
-      // CREAR
       const nuevaCategoria = {
         id: Date.now(),
         nombre: nombreLimpio,
@@ -173,9 +142,6 @@ const CategorySidebar = ({
     handleCancel();
   };
 
-  // =========================
-  // ELIMINAR
-  // =========================
   const handleDelete = (id) => {
     if (id === null) return;
 
@@ -187,9 +153,6 @@ const CategorySidebar = ({
     setMenuOpen(null);
   };
 
-  // =========================
-  // VALIDAR GUARDADO
-  // =========================
   const isSaveDisabled = () => {
     const nombre = newCat.trim();
     if (!nombre) return true;
@@ -207,7 +170,6 @@ const CategorySidebar = ({
   return (
     <div className="w-full h-full max-h-[calc(100vh-3rem)] overflow-y-auto p-5 rounded-3xl bg-white dark:bg-[#121016] border border-purple-500/20 shadow-2xl">
 
-      {/* HEADER */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-purple-500/10">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20">
@@ -229,7 +191,6 @@ const CategorySidebar = ({
         </button>
       </div>
 
-      {/* FORMULARIO */}
       {showForm && (
         <CategoriaFormulario
           newCat={newCat}
@@ -241,7 +202,6 @@ const CategorySidebar = ({
         />
       )}
 
-      {/* LISTA DINÁMICA */}
       <ul className="space-y-1.5">
         {categoriasConContador.map((cat) => (
           <li
@@ -293,7 +253,6 @@ const CategorySidebar = ({
                       <MoreVertical size={16} />
                     </button>
 
-                    {/* MENÚ FLOTANTE */}
                     {menuOpen === cat.id && (
                       <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-[#121016]/80 backdrop-blur-md border border-purple-500/20 rounded-xl shadow-2xl z-30 pointer-events-auto">
                         <button

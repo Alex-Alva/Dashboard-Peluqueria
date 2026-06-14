@@ -50,5 +50,4 @@ const Agenda = ({ onSelectCita, refreshKey }) => {
     </div>
   );
 };
-
 export default Agenda;

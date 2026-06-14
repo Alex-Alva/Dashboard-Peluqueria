@@ -25,13 +25,11 @@ const ServiceTable = ({
   setRefresh
 }) => {
 
-  // ESTADOS
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [modalType, setModalType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Carga inicial exclusivamente desde LocalStorage o archivo local alternativo
   useEffect(() => {
     const serviciosGuardados =
       JSON.parse(localStorage.getItem("servicios")) || serviciosData;
@@ -39,22 +37,18 @@ const ServiceTable = ({
     setServices(serviciosGuardados);
   }, []);
 
-  // FILTROS COMPLETO
   const filteredServices = useMemo(() => {
     return services.filter(service => {
-      // 1. FILTRO BUSCADOR
       const coincideBusqueda =
         !filters?.nombre ||
         service.nombre
           .toLowerCase()
           .includes(filters.nombre.toLowerCase());
 
-      // 2. FILTRO CATEGORÍA
       const coincideCategoria =
         !categoriaSeleccionada ||
         service.categoria_id === categoriaSeleccionada;
 
-      // 3. FILTRO DURACIÓN
       let coincideDuracion = true;
       if (filters?.duracion) {
         const d = service.duracion;
@@ -64,7 +58,6 @@ const ServiceTable = ({
         else if (filters.duracion === "120+") coincideDuracion = d > 120;
       }
 
-      // 4. FILTRO PRECIO (con validación robusta)
       let coincidePrecio = true;
       if (filters?.precio) {
         const p = toNumber(service.precio, 0);
@@ -74,7 +67,6 @@ const ServiceTable = ({
         else if (filters.precio === "100+") coincidePrecio = p > 100;
       }
 
-      // 5. FILTRO ESTADO
       let coincideEstado = true;
       if (filters?.estado) {
         const estadoBooleano = filters.estado === "true";
@@ -85,12 +77,10 @@ const ServiceTable = ({
     });
   }, [services, filters, categoriaSeleccionada]);
 
-  // RESETEAR PÁGINA CUANDO CAMBIAN LOS FILTROS
   useEffect(() => {
     setCurrentPage(1);
   }, [filters, categoriaSeleccionada]);
 
-  // AGREGAR NOMBRE DE CATEGORÍA
   const serviciosConCategoria = filteredServices.map(service => {
     const categoria = categorias.find(
       cat => Number(cat.id) === Number(service.categoria_id)
@@ -102,7 +92,6 @@ const ServiceTable = ({
     };
   });
 
-  // CONFIGURACIÓN DE PAGINACIÓN
   const itemsPerPage = 5;
   const totalPages = Math.ceil(serviciosConCategoria.length / itemsPerPage) || 1;
 
@@ -112,7 +101,6 @@ const ServiceTable = ({
     startIndex + itemsPerPage
   );
 
-  // LÓGICA DE VENTANA FLOTANTE PARA MÁXIMO 5 NÚMEROS DE PÁGINA
   const maxPageButtons = 5;
   const visiblePages = useMemo(() => {
     let startPage = Math.max(currentPage - Math.floor(maxPageButtons / 2), 1);
@@ -130,13 +118,11 @@ const ServiceTable = ({
     return pages;
   }, [currentPage, totalPages]);
 
-  // CERRAR MODAL
   const closeModal = () => {
     setModalType(null);
     setSelectedService(null);
   };
 
-  // CAMBIAR ESTADO (Persistido localmente)
   const handleToggleStatus = (id) => {
     const updated = services.map(service =>
       service.id === id
@@ -150,7 +136,6 @@ const ServiceTable = ({
     if (setRefresh) setRefresh(prev => !prev);
   };
 
-  // ELIMINAR (Persistido localmente)
   const handleDelete = (id) => {
     const updated = services.filter(
       service => service.id !== id
@@ -163,7 +148,6 @@ const ServiceTable = ({
     closeModal();
   };
 
-  // EDITAR (Persistido localmente con conversión de imagen local)
   const handleUpdate = async (updatedService) => {
     let imagenBase64 = updatedService.imagen_url;
 
@@ -201,8 +185,6 @@ const ServiceTable = ({
   return (
     <div className="w-full text-slate-800 dark:text-gray-300 font-sans p-4">
       <div className="w-full overflow-hidden rounded-3xl border border-purple-500/20 bg-slate-50 dark:bg-[#121016] shadow-2xl">
-        
-        {/* TABLA */}
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -307,7 +289,6 @@ const ServiceTable = ({
           </table>
         </div>
 
-        {/* COMPONENTE DE PAGINACIÓN */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-purple-500/10 bg-purple-500/[0.02]">
           <p className="text-xs text-slate-500 dark:text-gray-400">
             Mostrando <span className="font-semibold text-slate-900 dark:text-white">{serviciosConCategoria.length > 0 ? startIndex + 1 : 0}</span> al{' '}

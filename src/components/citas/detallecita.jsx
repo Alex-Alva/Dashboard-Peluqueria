@@ -4,8 +4,6 @@ import {
   Calendar, DollarSign, Save, RotateCcw 
 } from 'lucide-react';
 import { useDetalleCita, formatTime } from './hook/useDetalleCita';
-
-// Cambiado Pendiente de yellow a purple
 const STATUS_COLORS = {
   Realizada: 'bg-green-500/20 text-green-600 dark:text-green-400',
   Cancelada: 'bg-red-500/20 text-red-600 dark:text-red-400',
@@ -23,23 +21,16 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
 
   return (
     <>
-      {/* Notificación Toast */}
       {mensaje && (
         <div className="fixed top-5 right-5 z-[200] px-5 py-3 rounded-2xl bg-green-500 text-white font-bold shadow-2xl animate-in fade-in slide-in-from-top-4">
           {mensaje}
         </div>
       )}
-
-      {/* Overlay de fondo */}
       <div 
         onClick={onClose}
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-all duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} 
       />
-
-      {/* Panel Lateral */}
       <div className={`fixed top-0 right-0 h-full w-full max-w-[420px] z-50 bg-white dark:bg-[#121016] border-l dark:border-purple-950/40 shadow-2xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        
-        {/* Header */}
         <div className="p-6 border-b dark:border-purple-950/40 flex justify-between items-center bg-gray-50/50 dark:bg-[#121016]/50">
           <div>
             <h3 className="text-lg font-bold dark:text-white">{isEditing ? 'Editando Cita' : 'Detalle de Cita'}</h3>
@@ -49,11 +40,7 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
             <X size={20} className="text-gray-500" />
           </button>
         </div>
-
-        {/* Contenido Scrollable */}
         <div className="p-6 space-y-6 h-[calc(100vh-160px)] overflow-y-auto custom-scrollbar text-sm">
-          
-          {/* Cliente */}
           <Section icon={<User size={20}/>} label="Cliente">
             {isEditing ? (
               <input name="title" value={editData.title || ''} onChange={handleChange} className="w-full bg-gray-50 dark:bg-[#121016] border dark:border-purple-950/40 p-2 rounded-md dark:text-white outline-none focus:border-purple-500" />
@@ -61,8 +48,6 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
               <p className="font-semibold text-gray-900 dark:text-white text-base">{cita.title}</p>
             )}
           </Section>
-
-          {/* Servicio y Duración */}
           <Section icon={<Scissors size={20}/>} label="Servicio y Duración">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -83,8 +68,6 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
               </div>
             </div>
           </Section>
-
-          {/* Fecha y Hora */}
           <Section icon={<Calendar size={20}/>} label="Horario">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -120,7 +103,6 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
             </div>
           </Section>
 
-          {/* Precio y Estado */}
           <Section icon={<DollarSign size={20}/>} label="Finanzas y Estado">
             <div className="grid grid-cols-2 gap-4 items-center">
               <div>
@@ -146,7 +128,6 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
             </div>
           </Section>
 
-          {/* Notas */}
           <Section icon={<AlignLeft size={20}/>} label="Notas / Descripción">
             {isEditing ? (
               <textarea name="notes" value={editData.notes || ''} onChange={handleChange} rows="3" className="w-full bg-gray-50 dark:bg-[#121016] border dark:border-purple-950/40 p-2 rounded-md resize-none dark:text-white outline-none focus:border-purple-500" />
@@ -156,7 +137,6 @@ const DetalleCita = ({ isOpen, onClose, cita, onUpdate, onDelete }) => {
           </Section>
         </div>
 
-        {/* Footer con Acciones */}
         <div className="absolute bottom-0 left-0 w-full p-6 bg-white dark:bg-[#121016] border-t dark:border-purple-950/40">
           <div className="flex gap-3">
             {isEditing ? (

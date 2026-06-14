@@ -13,7 +13,6 @@ export default function DetalleVenta({ ventaActual, eliminarDelCarrito, actualiz
         )}
       </div>
 
-      {/* LISTA DE ITEMS DEL CARRITO */}
       <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-2.5">
         {ventaActual.items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 dark:text-zinc-500 gap-2 bg-white/40 dark:bg-[#121016]/40 rounded-2xl border border-slate-200 dark:border-purple-950/40 backdrop-blur-md">
@@ -33,7 +32,6 @@ export default function DetalleVenta({ ventaActual, eliminarDelCarrito, actualiz
                   <p className="text-sm font-semibold text-slate-800 dark:text-zinc-200 truncate">{item.nombre}</p>
                 </div>
                 
-                {/* Control de cantidad */}
                 <div className="flex items-center gap-2">
                   <div className="flex items-center bg-slate-50 dark:bg-purple-950/30 border border-slate-200 dark:border-purple-950/50 rounded-md p-0.5">
                     <button 
@@ -70,7 +68,6 @@ export default function DetalleVenta({ ventaActual, eliminarDelCarrito, actualiz
         )}
       </div>
 
-      {/* SECCIÓN INFERIOR DE TOTALES */}
       <div className="mt-4 bg-white/60 dark:bg-[#121016]/50 border border-slate-200 dark:border-purple-950/40 rounded-2xl p-5 shadow-lg backdrop-blur-md flex flex-col gap-4">
         <div className="grid grid-cols-2 gap-4 text-xs border-b border-slate-100 dark:border-purple-950/30 pb-3">
           <div className="flex justify-between text-slate-400 dark:text-zinc-500">

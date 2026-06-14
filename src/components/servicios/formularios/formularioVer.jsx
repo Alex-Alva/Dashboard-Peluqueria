@@ -36,12 +36,8 @@ export default function FormularioVer({ isOpen, onClose, service }) {
           bg-white
           dark:bg-[#121016]
           shadow-2xl
-        "
-      >
-        {/* Decoración superior */}
+        ">
         <div className="h-2 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-700" />
-
-        {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-purple-500/10 shrink-0">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -60,7 +56,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
           </button>
         </div>
 
-        {/* Contenido con scroll */}
         <div
           className="
             flex-1 
@@ -80,7 +75,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
             />
           )}
 
-          {/* Nombre */}
           <div className="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-50 to-white dark:from-purple-500/5 dark:to-white/[0.02] p-5">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20">
@@ -97,7 +91,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
             </div>
           </div>
 
-          {/* Precio y duración */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-2xl p-5 border border-purple-500/20 bg-white dark:bg-white/[0.03] shadow-sm">
               <div className="flex items-center gap-3 mb-3">
@@ -124,7 +117,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
             </div>
           </div>
 
-          {/* Descripción */}
           <div className="rounded-2xl border border-purple-500/20 bg-white dark:bg-white/[0.03] p-5">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-xl bg-purple-500/10">
@@ -137,7 +129,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
             </p>
           </div>
 
-          {/* Información extra */}
           <div className="rounded-2xl border border-dashed border-purple-500/20 p-5 bg-purple-50/40 dark:bg-purple-500/[0.03] mb-2">
             <h4 className="text-sm font-bold text-purple-700 dark:text-purple-400 mb-4">
               Información Adicional
@@ -163,7 +154,6 @@ export default function FormularioVer({ isOpen, onClose, service }) {
           </div>
         </div>
 
-        {/* Footer decorativo */}
         <div className="h-1 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-700" />
       </div>
     </div>

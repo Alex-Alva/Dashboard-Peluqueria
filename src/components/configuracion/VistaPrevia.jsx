@@ -11,7 +11,6 @@ export default function VistaPrevia({
   logoUrl, 
   menuItems 
 }) {
-  // Funciones auxiliares
   const getBackgroundColor = () => {
     const colores = {
       '#121016': 'bg-[#121016]',
@@ -74,10 +73,8 @@ export default function VistaPrevia({
         </h2>
       </div>
 
-      {/* Miniatura de Interfaz */}
       <div className={`${getBackgroundColor()} rounded-xl overflow-hidden border-4 border-slate-200 dark:border-purple-950/60 shadow-2xl`}>
         
-        {/* Mini Header */}
         <div className="bg-white/10 backdrop-blur-md border-b border-white/10 p-4">
           <div className="flex items-center gap-2">
             {logoUrl ? (
@@ -93,9 +90,7 @@ export default function VistaPrevia({
           </div>
         </div>
 
-        {/* Mini Sidebar y Contenido */}
         <div className="flex h-64">
-          {/* Mini Sidebar */}
           <div className="w-16 bg-black/20 backdrop-blur-sm border-r border-white/5 p-2 space-y-2">
             {menuItems.slice(0, 4).map((item) => (
               <div
@@ -106,8 +101,6 @@ export default function VistaPrevia({
               </div>
             ))}
           </div>
-
-          {/* Mini Contenido */}
           <div className="flex-1 p-4 space-y-3">
             <div className="h-3 bg-white/10 rounded w-3/4"></div>
             <div className="h-2 bg-white/5 rounded w-full"></div>
@@ -127,8 +120,6 @@ export default function VistaPrevia({
           </div>
         </div>
       </div>
-
-      {/* Info de Configuración Actual */}
       <div className="mt-6 p-4 bg-slate-50 dark:bg-purple-950/20 rounded-lg space-y-2 text-xs">
         <div className="flex justify-between">
           <span className="text-slate-600 dark:text-purple-400/70">Fondo:</span>

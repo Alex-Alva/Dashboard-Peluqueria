@@ -23,20 +23,17 @@ const ProductosTable = ({
   setRefresh
 }) => {
 
-  // ESTADOS
   const [productos, setProductos] = useState([]);
   const [selectedProducto, setSelectedProducto] = useState(null);
   const [modalType, setModalType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Carga inicial exclusivamente desde LocalStorage
   useEffect(() => {
     const productosGuardados =
       JSON.parse(localStorage.getItem("productos")) || productosData;
     setProductos(productosGuardados);
   }, []);
 
-  // 1. FILTRADO MEMORIZADO
   const filteredProductos = useMemo(() => {
     return productos.filter(producto => {
       const coincideBusqueda =
@@ -76,12 +73,10 @@ const ProductosTable = ({
     });
   }, [productos, filters, categoriaSeleccionada]);
 
-  // RESETEAR PÁGINA CUANDO CAMBIAN LOS FILTROS
   useEffect(() => {
     setCurrentPage(1);
   }, [filters, categoriaSeleccionada]);
 
-  // 2. ✅ OPTIMIZADO: Inyección de categorías memorizada
   const productosConCategoria = useMemo(() => {
     return filteredProductos.map(producto => {
       const categoria = categorias.find(
@@ -94,7 +89,6 @@ const ProductosTable = ({
     });
   }, [filteredProductos, categorias]);
 
-  // CONFIGURACIÓN DE PAGINACIÓN
   const itemsPerPage = 5;
   const totalPages = useMemo(() => {
     return Math.ceil(productosConCategoria.length / itemsPerPage) || 1;
@@ -102,12 +96,10 @@ const ProductosTable = ({
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   
-  // 3. ✅ OPTIMIZADO: Segmentación de página actual memorizada
   const currentItems = useMemo(() => {
     return productosConCategoria.slice(startIndex, startIndex + itemsPerPage);
   }, [productosConCategoria, startIndex]);
 
-  // LÓGICA DE VENTANA FLOTANTE DE PAGINACIÓN
   const maxPageButtons = 5;
   const visiblePages = useMemo(() => {
     let startPage = Math.max(currentPage - Math.floor(maxPageButtons / 2), 1);
@@ -292,7 +284,6 @@ const ProductosTable = ({
           </table>
         </div>
 
-        {/* PAGINACIÓN */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-violet-500/10 bg-violet-500/[0.02]">
           <p className="text-xs text-gray-500 dark:text-gray-400">
             Mostrando <span className="font-semibold text-black dark:text-white">{productosConCategoria.length > 0 ? startIndex + 1 : 0}</span> al{' '}
@@ -336,7 +327,6 @@ const ProductosTable = ({
         </div>
       </div>
 
-      {/* MODALES */}
       <FormularioVer
         isOpen={modalType === 'view'}
         onClose={closeModal}

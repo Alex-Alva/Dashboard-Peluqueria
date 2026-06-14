@@ -15,10 +15,6 @@ import Dashboard from "./pages/dashboard";
 import Configuracion from "./pages/configuracion";
 import { motion } from "framer-motion";
 
-/**
- * Componente interno que maneja la lógica de autenticación
- * Muestra login si no está autenticado, o la app completa si lo está
- */
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
@@ -38,13 +34,10 @@ function AppContent() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-100 dark:bg-[#0f0f0f] transition-colors duration-300">
-        {/* Sidebar de navegación */}
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-
-        {/* Contenedor de páginas con margen adaptativo controlado puramente por Framer Motion */}
         <motion.div
           animate={{ marginLeft: isOpen ? "220px" : "70px" }} 
-          className="min-h-screen p-4" // 👈 Removido 'transition-all' para evitar conflicto de lag
+          className="min-h-screen p-4"
         >
           <Routes>
             <Route path="/" element={<Dashboard />} /> 
@@ -62,9 +55,7 @@ function AppContent() {
     </BrowserRouter>
   );
 }
-/**
- * Componente raíz que envuelve la app con el proveedor de autenticación
- */
+
 export default function App() {
   return (
     <AuthProvider>

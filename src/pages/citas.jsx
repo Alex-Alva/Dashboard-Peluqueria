@@ -60,7 +60,6 @@ const Citas = () => {
         </main>
       </div>
 
-      {/* PANEL DESLIZANTE DE DETALLE */}
       <DetalleCita 
         isOpen={openDetalle} 
         onClose={handleClose} 
@@ -69,7 +68,6 @@ const Citas = () => {
         onDelete={eliminarCita}
       />
 
-      {/* MODAL DEL FORMULARIO */}
       <FormularioCita 
         isOpen={isFormOpen} 
         onClose={() => setIsFormOpen(false)} 

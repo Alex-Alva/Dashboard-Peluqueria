@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Importación de componentes divididos
 import MetricasGrid from '../components/dashboard/MetricasGrid';
 import GraficoGanancias from '../components/dashboard/GraficoGanancias';
 import GraficosCirculares from '../components/dashboard/GraficosCirculares';
@@ -36,10 +35,8 @@ const citasPendientes = [
 ];
 
 export default function Dashboard() {
-  // Sincroniza inicialmente con el estado de la etiqueta HTML
   const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains("dark"));
 
-  // Observer para escuchar en tiempo real si el Sidebar cambia la clase 'dark' en el documento
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsDark(document.documentElement.classList.contains("dark"));
@@ -55,8 +52,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 dark:from-[#0d0b0f] dark:to-[#16131a] text-slate-800 dark:text-zinc-100 p-6 flex flex-col gap-6 select-none antialiased transition-colors duration-300">
-      
-      {/* HEADER DEL DASHBOARD */}
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold tracking-wide bg-gradient-to-r from-slate-800 to-slate-500 dark:from-white dark:to-zinc-400 bg-clip-text text-transparent">
@@ -66,25 +62,18 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* GRID PRINCIPAL 3:1 */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 items-start">
         
-        {/* SECCIÓN IZQUIERDA Y CENTRAL (Métricas y Gráficos Lineales/Circulares) */}
         <div className="xl:col-span-3 flex flex-col gap-6 min-w-0">
           <MetricasGrid />
-          
-          {/* Contenedor seguro para Gráfico de Línea/Barras */}
           <div className="p-4 bg-white dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm min-w-0 min-h-0 shadow-sm">
             <GraficoGanancias data={datosGanancias} />
           </div>
-          
-          {/* Contenedor seguro para Gráficos Circulares */}
           <div className="p-4 bg-white dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm min-w-0 min-h-0 shadow-sm">
             <GraficosCirculares productos={datosProductos} servicios={datosServicios} isDark={isDark} />
           </div>
         </div>
 
-        {/* BARRA LATERAL DERECHA (Lista de Citas) */}
         <div className="w-full bg-white dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm p-4 shadow-sm min-w-0">
           <CitasPendientes citas={citasPendientes} />
         </div>

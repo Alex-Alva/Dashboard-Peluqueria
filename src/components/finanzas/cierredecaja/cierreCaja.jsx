@@ -13,12 +13,10 @@ import {
 
 const CierreCaja = () => {
   const [fechaSeleccionada, setFechaSeleccionada] = useState(
-    new Date().toLocaleDateString('sv-SE') // Devuelve exactamente YYYY-MM-DD en hora local
+    new Date().toLocaleDateString('sv-SE')
   );
   const [loading, setLoading] = useState(true);
-  const [baseInicial, setBaseInicial] = useState(150); // Monto inicial editable simulado
-
-  // Valores calculados por el sistema para ese día
+  const [baseInicial, setBaseInicial] = useState(150);
   const [datosSistema, setDatosSistema] = useState({
     ingresos: 0,
     egresos: 0,
@@ -29,26 +27,15 @@ const CierreCaja = () => {
       tarjeta: 0
     }
   });
-
-  // 2. ESTADOS DEL FORMULARIO DE CUADRE (Valores ingresados por el cajero)
   const [valoresContados, setValoresContados] = useState({
     efectivo: '',
     yape: '',
     plin: '',
     tarjeta: ''
   });
-
-  // ==========================================
-  // 3. GENERACIÓN DE DATOS SIMULADOS COMPATIBLE
-  // ==========================================
   const fetchDatosDelDia = async () => {
     setLoading(true);
-    
-    // Simulamos un retraso de red de 400ms para mantener el feeling de carga real
     await new Promise(resolve => setTimeout(resolve, 400));
-
-    // Extraemos el día de forma segura basándonos en el string local "YYYY-MM-DD"
-    // Esto evita que JavaScript reste un día por la zona horaria al usar new Date()
     const partes = fechaSeleccionada.split('-');
     const diaNum = partes[2] ? parseInt(partes[2], 10) : 15;
     
@@ -74,14 +61,8 @@ const CierreCaja = () => {
   useEffect(() => {
     fetchDatosDelDia();
   }, [fechaSeleccionada]);
-
-  // ==========================================
-  // 4. CÁLCULOS DERIVADOS DE GANANCIA Y DIFERENCIAS
-  // ==========================================
   const gananciaDia = datosSistema.ingresos - datosSistema.egresos;
   const saldoCajaEsperado = Number(baseInicial) + datosSistema.ingresos - datosSistema.egresos;
-
-  // Manejar el cambio en los inputs de validación física
   const handleInputChange = (metodo, valor) => {
     setValoresContados(prev => ({
       ...prev,
@@ -89,28 +70,21 @@ const CierreCaja = () => {
     }));
   };
 
-  // Calcular diferencias método por método
   const calcularDiferencia = (metodo) => {
     const contado = parseFloat(valoresContados[metodo]) || 0;
     const esperado = datosSistema.metodos[metodo];
     return contado - esperado;
   };
 
-  // Calcular diferencia total global
   const diferenciaTotalGlobal = Object.keys(datosSistema.metodos).reduce((acc, metodo) => {
     const contado = parseFloat(valoresContados[metodo]) || 0;
     const esperado = datosSistema.metodos[metodo];
     return acc + (contado - esperado);
   }, 0);
 
-  // ==========================================
-  // 5. ACCIÓN FINAL: COMPORTAMIENTO SIMULADO
-  // ==========================================
   const handleCerrarCaja = () => {
     alert(`¡Caja cerrada con éxito de manera simulada!\n\n` + 
           `Diferencia final registrada: S/ ${diferenciaTotalGlobal.toFixed(2)}`);
-    
-    // Limpiar los campos del formulario tras un cierre exitoso
     setBaseInicial(150);
     setValoresContados({
       efectivo: '',
@@ -124,8 +98,6 @@ const CierreCaja = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#121016] p-8 text-slate-800 dark:text-zinc-100 transition-colors duration-300">
-
-      {/* HEADER */}
       <header className="flex flex-col md:flex-row justify-between gap-6 mb-12 items-start md:items-center">
         <div>
           <h1 className="text-3xl font-light tracking-[0.25em] uppercase text-slate-900 dark:text-white">
@@ -152,7 +124,6 @@ const CierreCaja = () => {
         </button>
       </header>
 
-      {/* TARJETAS RESUMEN */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <div className="bg-white dark:bg-[#121016]/40 p-6 border-b-2 border-slate-200 dark:border-purple-950/20 shadow-sm rounded-xl">
           <div className="flex justify-between items-start mb-4">
@@ -195,16 +166,12 @@ const CierreCaja = () => {
           </div>
         </div>
       </div>
-
-      {/* SECCIÓN DE CUADRE MÉTODO POR MÉTODO */}
       {loading ? (
         <div className="p-10 text-center uppercase tracking-widest text-xs font-semibold text-slate-400 dark:text-zinc-500">
           Calculando montos del sistema...
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* TABLA IZQUIERDA: VALIDACIÓN DETALLADA */}
           <div className="lg:col-span-8 bg-white dark:bg-[#121016]/20 border border-slate-100 dark:border-purple-950/30 rounded-xl shadow-sm overflow-hidden">
             <div className="p-5 bg-slate-50/50 dark:bg-[#121016]/60 border-b border-slate-100 dark:border-purple-950/30 flex items-center gap-2">
               <ArrowRightLeft size={16} className="text-purple-600 dark:text-purple-400" />
@@ -246,8 +213,6 @@ const CierreCaja = () => {
               </tbody>
             </table>
           </div>
-
-          {/* RESUMEN DERECHO: DICTAMEN DE CAJA */}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white dark:bg-[#121016]/20 p-6 border border-slate-100 dark:border-purple-950/30 rounded-xl shadow-sm flex flex-col justify-between">
               <div>
@@ -287,7 +252,6 @@ const CierreCaja = () => {
               </div>
             </div>
           </div>
-
         </div>
       )}
     </div>

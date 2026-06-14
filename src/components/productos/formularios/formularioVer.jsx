@@ -52,7 +52,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
           shadow-2xl
         "
       >
-        {/* Decoración superior - Degradado Neón */}
         <div className="h-2 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-500 to-purple-700" />
 
         {/* Header */}
@@ -74,7 +73,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
           </button>
         </div>
 
-        {/* Contenido con scroll */}
         <div
           className="
             flex-1 
@@ -86,7 +84,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             scrollbar-track-transparent
           "
         >
-          {/* Imagen */}
           {(product.imagen_url || product.imagen) && (
             <img
               src={product.imagen_url || product.imagen}
@@ -95,7 +92,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             />
           )}
 
-          {/* Nombre */}
           <div className="rounded-2xl border border-purple-950/20 bg-gradient-to-br from-slate-50 to-white dark:from-purple-600/[0.03] dark:to-white/[0.01] p-5">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-purple-600/10 border border-purple-600/20">
@@ -112,7 +108,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             </div>
           </div>
 
-          {/* Costo, Precio y Stock */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="rounded-2xl p-5 border border-purple-950/20 bg-white dark:bg-white/[0.02] shadow-sm">
               <div className="flex items-center gap-3 mb-3">
@@ -151,7 +146,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             </div>
           </div>
 
-          {/* Ganancia Calculada */}
           <div className="rounded-2xl border-2 border-dashed border-emerald-500/30 bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-500/5 dark:to-emerald-500/[0.02] p-5">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-emerald-600/10 border border-emerald-600/20">
@@ -171,7 +165,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             </div>
           </div>
 
-          {/* Descripción */}
           <div className="rounded-2xl border border-purple-950/20 bg-white dark:bg-white/[0.02] p-5">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-xl bg-purple-600/10">
@@ -184,7 +177,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
             </p>
           </div>
 
-          {/* Información extra */}
           <div className="rounded-2xl border border-dashed border-purple-950/30 p-5 bg-slate-50/50 dark:bg-purple-600/[0.02] mb-2">
             <h4 className="text-sm font-bold text-purple-700 dark:text-purple-400 mb-4">
               Información Adicional
@@ -210,7 +202,6 @@ export default function FormularioVer({ isOpen, onClose, product }) {
           </div>
         </div>
 
-        {/* Footer decorativo */}
         <div className="h-1 w-full shrink-0 bg-gradient-to-r from-purple-700 via-indigo-500 to-purple-700" />
       </div>
     </div>

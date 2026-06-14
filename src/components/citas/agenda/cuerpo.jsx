@@ -4,11 +4,7 @@ const AgendaBody = ({ days, hours, appointments, onSelectCita }) => {
   return (
     <div className="flex-1 overflow-auto bg-white dark:bg-[#121016] rounded-xl border border-gray-200 dark:border-purple-950/40 custom-scrollbar">
       <div className="grid grid-cols-[80px_repeat(7,1fr)] min-w-[1000px]">
-        
-        {/* ESQUINA */}
         <div className="sticky top-0 left-0 bg-white dark:bg-[#121016] border-b border-r border-gray-200 dark:border-purple-950/40 z-20" />
-
-        {/* CABECERA DÍAS */}
         {days.map((day, i) => (
           <div
             key={i}
@@ -22,20 +18,14 @@ const AgendaBody = ({ days, hours, appointments, onSelectCita }) => {
             </span>
           </div>
         ))}
-
-        {/* HORAS */}
         {hours.map((hour) => {
           const hourNumber = Number(hour.split(':')[0]);
 
           return (
             <React.Fragment key={hour}>
-              
-              {/* ETIQUETA HORA */}
               <div className="border-b border-r border-gray-200 dark:border-purple-950/40 p-4 text-xs font-medium text-gray-400 sticky left-0 bg-white dark:bg-[#121016] z-10">
                 {hour}
               </div>
-
-              {/* COLUMNAS DÍA */}
               {days.map((day, dayIndex) => (
                 <div
                   key={dayIndex}

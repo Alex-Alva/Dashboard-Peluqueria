@@ -17,14 +17,10 @@ import {
 } from '../../../common/utils';
 
 const Egresos = () => {
-  // Función auxiliar para obtener la fecha actual en formato YYYY-MM-DD (Local)
   const getFechaActualLocal = () => {
     return toLocalDateString(new Date());
   };
 
-  // ==========================================
-  // DATOS SIMULADOS INICIALES PARA PRUEBAS
-  // ==========================================
   const datosSimuladosIniciales = [
     { id: 1, fecha: getFechaActualLocal(), categoria: 'Compra de Productos', descripcion: 'Lote de tintes y champú premium', monto: 350.00, metodo_pago: 'Tarjeta' },
     { id: 2, fecha: getFechaActualLocal(), categoria: 'Pagos de Servicios', descripcion: 'Recibo de luz local comercial', monto: 120.50, metodo_pago: 'Efectivo' },
@@ -32,36 +28,24 @@ const Egresos = () => {
     { id: 4, fecha: '2026-05-15', categoria: 'Devoluciones', descripcion: 'Devolución cliente por producto dañado', monto: 45.00, metodo_pago: 'Efectivo' }
   ];
 
-  // ESTADOS PARA DATOS Y FILTROS
   const [egresos, setEgresos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtroFecha, setFiltroFecha] = useState(getFechaActualLocal());
   const [filtroCategoria, setFiltroCategoria] = useState('Todos');
-
-  // ESTADOS PARA EL MODAL DE NUEVO EGRESO
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [nuevoMonto, setNuevoMonto] = useState('');
   const [nuevaDesc, setNuevaDesc] = useState('');
   const [nuevaCat, setNuevaCat] = useState('Compra de Productos');
   const [nuevoMetodo, setNuevoMetodo] = useState('Efectivo');
-
-  // ESTADOS PARA EL MODAL DE EDICIÓN / CORRECCIÓN
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editId, setEditId] = useState(null);
   const [editMonto, setEditMonto] = useState('');
   const [editDesc, setEditDesc] = useState('');
   const [editCat, setEditCat] = useState('Compra de Productos');
   const [editMetodo, setEditMetodo] = useState('Efectivo');
-
-  // ==========================================
-  // 1. CARGA DE DATOS SIMULADOS
-  // ==========================================
   const fetchEgresos = async () => {
     setLoading(true);
-    // Simulamos latencia de red de 400ms
     await new Promise(resolve => setTimeout(resolve, 400));
-    
-    // Si no hay datos previos guardados en el estado, cargamos los iniciales
     if (egresos.length === 0) {
       setEgresos(datosSimuladosIniciales);
     }
@@ -71,16 +55,12 @@ const Egresos = () => {
   useEffect(() => {
     fetchEgresos();
   }, []);
-
-  // ==========================================
-  // 2. LÓGICA: REGISTRAR NUEVO EGRESO
-  // ==========================================
   const handleSaveEgreso = (e) => {
     e.preventDefault();
     if (!nuevoMonto || parseFloat(nuevoMonto) <= 0) return;
 
     const nuevoRegistro = {
-      id: Date.now(), // ID único temporal
+      id: Date.now(),
       fecha: getFechaActualLocal(),
       monto: parseFloat(nuevoMonto),
       categoria: nuevaCat,
@@ -89,18 +69,12 @@ const Egresos = () => {
     };
 
     setEgresos(prev => [nuevoRegistro, ...prev]);
-
-    // Limpieza de campos
     setNuevoMonto('');
     setNuevaDesc('');
     setNuevaCat('Compra de Productos');
     setNuevoMetodo('Efectivo');
     setIsModalOpen(false);
   };
-
-  // ==========================================
-  // 3. LÓGICA: EDICIÓN / CORRECCIÓN DE EGRESOS
-  // ==========================================
   const handleAbrirEdicion = (egreso) => {
     setEditId(egreso.id);
     setEditMonto(egreso.monto);
@@ -129,10 +103,6 @@ const Egresos = () => {
 
     setIsEditModalOpen(false);
   };
-
-  // ==========================================
-  // 4. FILTROS EN CLIENTE
-  // ==========================================
   const limpiarFiltros = () => {
     setFiltroFecha(getFechaActualLocal());
     setFiltroCategoria('Todos');
@@ -143,10 +113,6 @@ const Egresos = () => {
     const cumpleCat = filtroCategoria === 'Todos' ? true : item.categoria === filtroCategoria;
     return cumpleFecha && cumpleCat;
   });
-
-  // ==========================================
-  // 5. CÁLCULO DE RESUMEN ACUMULADO
-  // ==========================================
   const totales = egresosFiltrados.reduce((acc, item) => {
     const montoNum = toNumber(item.monto, 0);
     acc.total += montoNum;
@@ -164,12 +130,10 @@ const Egresos = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#121016] p-8 text-slate-800 dark:text-zinc-100 transition-colors duration-300">
 
-      {/* Header */}
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
         <h1 className="text-3xl font-light tracking-[0.25em] uppercase text-slate-900 dark:text-white">
           Egresos <span className="text-purple-600 dark:text-purple-400">.</span>
         </h1>
-
         <button 
           onClick={() => setIsModalOpen(true)}
           className="bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white dark:text-[#121016] px-6 py-3 rounded-lg flex items-center gap-2 hover:scale-[1.01] active:scale-[0.99] transition-all font-bold uppercase text-xs tracking-widest shadow-lg shadow-purple-600/10 dark:shadow-purple-500/5"
@@ -178,8 +142,6 @@ const Egresos = () => {
           Nuevo Egreso
         </button>
       </header>
-
-      {/* Cards de Resumen */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {[
           { label: 'Total Egresos', value: totales.total, icon: Wallet, border: 'border-purple-600 dark:border-purple-400' },
@@ -203,8 +165,6 @@ const Egresos = () => {
           </div>
         ))}
       </div>
-
-      {/* Filtros */}
       <div className="bg-white dark:bg-[#121016]/20 p-6 mb-8 rounded-xl shadow-sm border border-slate-100 dark:border-purple-950/30">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
           <div>
@@ -240,8 +200,6 @@ const Egresos = () => {
           </button>
         </div>
       </div>
-
-      {/* Tabla de Registros */}
       <div className="bg-white dark:bg-[#121016]/20 border border-slate-100 dark:border-purple-950/30 rounded-xl shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-10 text-center uppercase tracking-widest text-xs font-semibold text-slate-400 dark:text-zinc-500">Cargando transacciones...</div>
@@ -308,8 +266,6 @@ const Egresos = () => {
           </div>
         )}
       </div>
-
-      {/* MODAL FORMULARIO NUEVO EGRESO */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#121016]/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
           <div className="bg-white dark:bg-[#121016] w-full max-w-md p-6 border border-slate-200 dark:border-purple-950/60 shadow-2xl rounded-xl animate-in fade-in zoom-in-95 duration-150">
@@ -394,8 +350,6 @@ const Egresos = () => {
           </div>
         </div>
       )}
-
-      {/* MODAL EDITAR / CORREGIR EGRESO */}
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-[#121016]/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
           <div className="bg-white dark:bg-[#121016] w-full max-w-md p-6 border border-slate-200 dark:border-purple-950/60 shadow-2xl rounded-xl animate-in fade-in zoom-in-95 duration-150">
@@ -478,7 +432,6 @@ const Egresos = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

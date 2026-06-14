@@ -7,17 +7,6 @@
  * ============================================================================
  */
 
-// ============================================================================
-// MANEJO SEGURO DE FECHAS
-// ============================================================================
-
-/**
- * Formatea una fecha en formato local (dd/mm/yyyy hh:mm)
- * Maneja null, undefined, strings vacíos y formatos inválidos
- * @param {string|Date|null|undefined} dateInput - Fecha a formatear
- * @param {object} options - Opciones de formato (locale, format)
- * @returns {string} Fecha formateada o '-' si es inválida
- */
 export const formatFechaLocal = (dateInput, options = {}) => {
   const {
     locale = 'es-PE',
@@ -25,20 +14,14 @@ export const formatFechaLocal = (dateInput, options = {}) => {
     fallback = '-'
   } = options;
 
-  // Validación: null, undefined o string vacío
   if (!dateInput || dateInput === '') return fallback;
 
   try {
-    // Si ya es un objeto Date válido
     let fechaObj = dateInput instanceof Date ? dateInput : new Date(dateInput);
-
-    // Validar que la fecha sea válida
     if (isNaN(fechaObj.getTime())) {
       console.warn(`Fecha inválida recibida: ${dateInput}`);
       return fallback;
     }
-
-    // Formatear según opciones
     const formatOptions = {
       year: 'numeric',
       month: '2-digit',
@@ -53,12 +36,6 @@ export const formatFechaLocal = (dateInput, options = {}) => {
   }
 };
 
-/**
- * Convierte una fecha a formato YYYY-MM-DD respetando zona horaria local
- * Evita el bug de desfase por timezone al usar split('T')[0]
- * @param {string|Date|null|undefined} dateInput - Fecha a convertir
- * @returns {string|null} Fecha en formato YYYY-MM-DD o null
- */
 export const toLocalDateString = (dateInput) => {
   if (!dateInput || dateInput === '') return null;
 
@@ -66,8 +43,6 @@ export const toLocalDateString = (dateInput) => {
     const fechaObj = dateInput instanceof Date ? dateInput : new Date(dateInput);
 
     if (isNaN(fechaObj.getTime())) return null;
-
-    // Extraer componentes en zona horaria local (no UTC)
     const year = fechaObj.getFullYear();
     const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
     const day = String(fechaObj.getDate()).padStart(2, '0');
@@ -78,23 +53,12 @@ export const toLocalDateString = (dateInput) => {
     return null;
   }
 };
-
-/**
- * Compara si una fecha está dentro de un rango (inclusive)
- * Maneja zonas horarias correctamente
- * @param {string|Date} fecha - Fecha a validar
- * @param {string|null} fechaInicio - Inicio del rango (YYYY-MM-DD)
- * @param {string|null} fechaFin - Fin del rango (YYYY-MM-DD)
- * @returns {boolean} true si está en el rango
- */
 export const estaEnRangoFechas = (fecha, fechaInicio, fechaFin) => {
   if (!fecha) return false;
 
   try {
     const fechaLocal = toLocalDateString(fecha);
     if (!fechaLocal) return false;
-
-    // Comparar strings YYYY-MM-DD directamente (más seguro que timestamps)
     if (fechaInicio && fechaLocal < fechaInicio) return false;
     if (fechaFin && fechaLocal > fechaFin) return false;
 
@@ -104,11 +68,6 @@ export const estaEnRangoFechas = (fecha, fechaInicio, fechaFin) => {
     return false;
   }
 };
-
-/**
- * Obtiene la fecha actual en formato YYYY-MM-DD (zona horaria local)
- * @returns {string} Fecha actual
- */
 export const getFechaHoyLocal = () => {
   return toLocalDateString(new Date());
 };
@@ -117,27 +76,14 @@ export const getFechaHoyLocal = () => {
 // MANEJO SEGURO DE NÚMEROS Y MONEDA
 // ============================================================================
 
-/**
- * Convierte un valor a número de forma segura
- * @param {any} value - Valor a convertir
- * @param {number} defaultValue - Valor por defecto si falla
- * @returns {number} Número parseado o valor por defecto
- */
 export const toNumber = (value, defaultValue = 0) => {
   if (value === null || value === undefined || value === '') {
     return defaultValue;
   }
-
   const parsed = Number(value);
   return isNaN(parsed) ? defaultValue : parsed;
 };
 
-/**
- * Formatea un número como moneda peruana
- * @param {number|string|null|undefined} value - Valor a formatear
- * @param {object} options - Opciones de formato
- * @returns {string} Valor formateado
- */
 export const formatMoneda = (value, options = {}) => {
   const {
     locale = 'es-PE',
@@ -164,13 +110,6 @@ export const formatMoneda = (value, options = {}) => {
   }
 };
 
-/**
- * Calcula un porcentaje de forma segura
- * @param {number|string} parte - Parte del total
- * @param {number|string} total - Total
- * @param {number} decimals - Decimales a mostrar
- * @returns {number} Porcentaje calculado
- */
 export const calcularPorcentaje = (parte, total, decimals = 2) => {
   const numParte = toNumber(parte, 0);
   const numTotal = toNumber(total, 0);
@@ -181,12 +120,6 @@ export const calcularPorcentaje = (parte, total, decimals = 2) => {
   return Number(porcentaje.toFixed(decimals));
 };
 
-/**
- * Calcula la ganancia y margen de un producto
- * @param {number|string} precio - Precio de venta
- * @param {number|string} costo - Costo del producto
- * @returns {object} {ganancia, margen}
- */
 export const calcularGanancia = (precio, costo) => {
   const numPrecio = toNumber(precio, 0);
   const numCosto = toNumber(costo, 0);
@@ -204,12 +137,6 @@ export const calcularGanancia = (precio, costo) => {
 // VALIDACIÓN Y SANITIZACIÓN DE STRINGS
 // ============================================================================
 
-/**
- * Valida y limpia un string de forma segura
- * @param {any} value - Valor a limpiar
- * @param {string} defaultValue - Valor por defecto
- * @returns {string} String limpio
- */
 export const sanitizeString = (value, defaultValue = '') => {
   if (value === null || value === undefined) return defaultValue;
   
@@ -217,12 +144,6 @@ export const sanitizeString = (value, defaultValue = '') => {
   return str === '' ? defaultValue : str;
 };
 
-/**
- * Valida si un string contiene un término de búsqueda (case insensitive)
- * @param {any} value - Valor a buscar
- * @param {string} searchTerm - Término de búsqueda
- * @returns {boolean} true si contiene el término
- */
 export const contieneTexto = (value, searchTerm) => {
   if (!searchTerm || searchTerm.trim() === '') return true;
   if (value === null || value === undefined) return false;
@@ -233,12 +154,6 @@ export const contieneTexto = (value, searchTerm) => {
   return valorLimpio.includes(busquedaLimpia);
 };
 
-/**
- * Valida si un valor está en un rango numérico
- * @param {number|string} value - Valor a validar
- * @param {string} range - Rango en formato "min-max", "max+" o ""
- * @returns {boolean} true si está en el rango
- */
 export const estaEnRangoNumerico = (value, range) => {
   if (!range || range === '') return true;
 
@@ -267,13 +182,6 @@ export const estaEnRangoNumerico = (value, range) => {
 // UTILIDADES DE ARRAYS Y OBJETOS
 // ============================================================================
 
-/**
- * Obtiene un valor anidado de forma segura de un objeto
- * @param {object} obj - Objeto a consultar
- * @param {string} path - Ruta en formato "prop.subprop.value"
- * @param {any} defaultValue - Valor por defecto
- * @returns {any} Valor encontrado o defaultValue
- */
 export const getNestedValue = (obj, path, defaultValue = null) => {
   if (!obj || typeof obj !== 'object') return defaultValue;
 
@@ -285,13 +193,6 @@ export const getNestedValue = (obj, path, defaultValue = null) => {
   }
 };
 
-/**
- * Ordena un array de objetos por una propiedad
- * @param {Array} array - Array a ordenar
- * @param {string} key - Propiedad por la que ordenar
- * @param {string} order - 'asc' o 'desc'
- * @returns {Array} Array ordenado
- */
 export const ordenarPor = (array, key, order = 'asc') => {
   if (!Array.isArray(array)) return [];
 
@@ -309,12 +210,6 @@ export const ordenarPor = (array, key, order = 'asc') => {
 // VALIDACIONES ESPECÍFICAS DEL NEGOCIO
 // ============================================================================
 
-/**
- * Valida el estado de un elemento (activo/inactivo)
- * @param {any} estado - Estado a validar
- * @param {string} filtroEstado - Filtro aplicado ("true", "false", "")
- * @returns {boolean} true si pasa el filtro
- */
 export const validarEstado = (estado, filtroEstado) => {
   if (!filtroEstado || filtroEstado === '') return true;
 
@@ -324,11 +219,6 @@ export const validarEstado = (estado, filtroEstado) => {
   return estadoBooleano === filtroBooleano;
 };
 
-/**
- * Genera un código único simple (para uso temporal en simulaciones)
- * @param {string} prefix - Prefijo del código
- * @returns {string} Código generado
- */
 export const generarCodigoTemporal = (prefix = 'TEMP') => {
   const timestamp = Date.now();
   const random = Math.floor(Math.random() * 1000);

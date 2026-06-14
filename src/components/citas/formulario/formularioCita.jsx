@@ -2,7 +2,6 @@ import React from 'react';
 import { X, Calendar, Sparkles, User, Clock } from 'lucide-react';
 import { useFormularioCita, HORAS } from '../hook/useFromularioCita';
 
-// Sincronizado Pendiente con el nuevo esquema morado
 const estadoStyles = {
   Pendiente: 'bg-purple-500/20 text-purple-600 border-purple-500/30',
   Confirmada: 'bg-blue-500/20 text-blue-600 border-blue-500/30',
@@ -33,8 +32,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
       )}
 
       <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl border border-purple-500/20 bg-white dark:bg-[#121016] shadow-2xl overflow-hidden">
-        
-        {/* HEADER */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-purple-500/10 bg-gradient-to-r from-purple-500/5 to-transparent">
           <h2 className="text-xl font-bold text-black dark:text-white flex items-center gap-2">
             <Calendar className="text-purple-600 dark:text-purple-400" size={22} /> Nueva Cita
@@ -44,11 +41,8 @@ const FormularioCita = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* FORM */}
         <form onSubmit={guardarCita} className="p-6 overflow-y-auto custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            
-            {/* BUSCADOR CLIENTE */}
             <div className="space-y-2 relative">
               <label className="text-xs font-bold uppercase text-gray-500 flex items-center gap-2">
                 <User size={14} className="text-purple-600 dark:text-purple-400" /> Cliente
@@ -70,8 +64,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
                 </div>
               )}
             </div>
-
-            {/* BUSCADOR SERVICIO */}
             <div className="space-y-2 relative">
               <label className="text-xs font-bold uppercase text-gray-500 flex items-center gap-2">
                 <Sparkles size={14} className="text-purple-600 dark:text-purple-400" /> Servicio
@@ -94,8 +86,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
                 </div>
               )}
             </div>
-
-            {/* FECHA, PRECIO, DURACIÓN */}
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase text-gray-500">Fecha</label>
               <input type="date" required value={formData.fecha} onChange={(e) => setFormData({...formData, fecha: e.target.value})} className="w-full rounded-xl border border-purple-950/40 bg-gray-50 dark:bg-[#121016] p-3 text-sm dark:text-white outline-none focus:border-purple-500" />
@@ -115,8 +105,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
               <label className="text-xs font-bold uppercase text-gray-500">Hora Fin</label>
               <div className="p-3 rounded-xl bg-zinc-100 dark:bg-purple-950/30 text-sm dark:text-white border dark:border-purple-950/20">{calcularHoraFin()}</div>
             </div>
-
-            {/* SELECTOR DE HORAS */}
             <div className="md:col-span-2 space-y-3">
               <label className="text-xs font-bold uppercase text-gray-500 flex items-center gap-2"><Clock size={14} className="text-purple-600 dark:text-purple-400" /> Seleccionar Hora</label>
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
@@ -141,8 +129,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
                 })}
               </div>
             </div>
-
-            {/* ESTADOS */}
             <div className="md:col-span-2 space-y-3">
               <label className="text-xs font-bold uppercase text-gray-500">Estado</label>
               <div className="flex gap-2 flex-wrap">
@@ -160,8 +146,6 @@ const FormularioCita = ({ isOpen, onClose }) => {
                 ))}
               </div>
             </div>
-
-            {/* NOTAS */}
             <div className="md:col-span-2 space-y-2">
               <label className="text-xs font-bold uppercase text-gray-500">Notas</label>
               <textarea

@@ -1,11 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
-
-// === DATOS SIMULADOS (MOCK DATA) ===
-// Reemplazan lo que venía de la tabla 'citas' en Supabase
 const DATOS_CITAS_MOCK = [
   {
     id: 1,
-    fecha: new Date().toISOString().split('T')[0], // Hoy
+    fecha: new Date().toISOString().split('T')[0],
     hora_inicio: "09:00",
     duracion_minutos: 45,
     precio: 50,
@@ -16,7 +13,7 @@ const DATOS_CITAS_MOCK = [
   },
   {
     id: 2,
-    fecha: new Date().toISOString().split('T')[0], // Hoy
+    fecha: new Date().toISOString().split('T')[0],
     hora_inicio: "14:30",
     duracion_minutos: 90,
     precio: 120,
@@ -27,12 +24,12 @@ const DATOS_CITAS_MOCK = [
   },
   {
     id: 3,
-    fecha: new Date().toISOString().split('T')[0], // Hoy
+    fecha: new Date().toISOString().split('T')[0],
     hora_inicio: "17:00",
     duracion_minutos: 30,
     precio: 35,
     notas: "",
-    estado: "Cancelada", // Esta se ocultará automáticamente por tu lógica de abajo
+    estado: "Cancelada",
     clientes: { nombre: "Mauricio Rivas" },
     servicio: { nombre: "Barba & Perfilado" }
   }
@@ -63,8 +60,6 @@ export const useAgenda = (refreshKey) => {
     if (h < 20) return colores[5];
     return colores[6];
   };
-
-  // Ahora procesa los datos locales de forma síncrona
   const obtenerCitas = () => {
     const citasFormateadas = DATOS_CITAS_MOCK.map(cita => {
       const start = new Date(`${cita.fecha}T${cita.hora_inicio}`);
@@ -88,7 +83,6 @@ export const useAgenda = (refreshKey) => {
     setAppointments(citasFormateadas);
   };
 
-  // Carga inicial y refrescos manuales simplificados en un solo useEffect
   useEffect(() => {
     obtenerCitas();
   }, [refreshKey]);
@@ -112,7 +106,6 @@ export const useAgenda = (refreshKey) => {
 
   const visibleAppointments = useMemo(() => {
     return appointments.filter(app => {
-      // OCULTAR CANCELADAS
       if (app.status === 'Cancelada') {
         return false;
       }

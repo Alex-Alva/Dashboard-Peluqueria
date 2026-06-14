@@ -14,7 +14,6 @@ export default function CitasPendientes({ citas }) {
         </span>
       </div>
 
-      {/* Lista Scrolleable Internamente */}
       <div className="flex-1 overflow-y-auto flex flex-col gap-3 pr-1 scrollbar-thin">
         {citas.map((cita) => (
           <div 
@@ -50,8 +49,6 @@ export default function CitasPendientes({ citas }) {
           </div>
         ))}
       </div>
-
-      {/* Acción al pie del panel lateral */}
       <button className="w-full py-2.5 bg-gradient-to-r from-purple-700 to-indigo-600 hover:opacity-90 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all mt-2 shadow-md shadow-purple-600/10">
         Ver Agenda Completa
       </button>

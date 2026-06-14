@@ -50,7 +50,6 @@ export default function ClientesPanel({ ventaActual, seleccionarCliente, mockCli
 
       <div className="p-4 flex flex-col gap-3 overflow-y-auto flex-1">
         
-        {/* Barra de herramientas: Buscador o Entrada Manual */}
         <div className="flex items-center gap-2">
           {esManual ? (
             <div className="flex-1 flex gap-1.5">
@@ -80,7 +79,6 @@ export default function ClientesPanel({ ventaActual, seleccionarCliente, mockCli
             />
           )}
 
-          {/* Botón de usuario tachado */}
           <button 
             onClick={() => {
               setEsManual(!esManual);
@@ -93,7 +91,6 @@ export default function ClientesPanel({ ventaActual, seleccionarCliente, mockCli
           </button>
         </div>
         
-        {/* Tarjeta de cliente seleccionado actualmente */}
         {ventaActual.cliente ? (
           <div className="p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/20 relative flex justify-between items-center">
             <div>
@@ -107,7 +104,6 @@ export default function ClientesPanel({ ventaActual, seleccionarCliente, mockCli
             </button>
           </div>
         ) : (
-          /* Lista filtrada de clientes */
           <div className="flex flex-col gap-2">
             {clientesFiltrados.length > 0 ? (
               clientesFiltrados.map(c => (

@@ -12,8 +12,6 @@ export default function Tipografia({ tamanoTexto, setTamanoTexto, tipoFuente, se
           Tipografía
         </h2>
       </div>
-
-      {/* Tamaño de Texto */}
       <div className="mb-6">
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Tamaño de Texto
@@ -43,8 +41,6 @@ export default function Tipografia({ tamanoTexto, setTamanoTexto, tipoFuente, se
           ))}
         </div>
       </div>
-
-      {/* Tipo de Fuente */}
       <div>
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Tipo de Fuente

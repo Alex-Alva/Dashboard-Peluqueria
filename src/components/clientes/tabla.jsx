@@ -109,7 +109,6 @@ const ClienteTable = ({ filters, listaClientes, abrirModal }) => {
 
                       <button 
                         onClick={() => {
-                          // Funcionalidad de eliminación no implementada
                           console.log('Botón de eliminar clickeado para cliente:', cliente.id);
                         }}
                         className="p-1.5 rounded-lg text-red-600 dark:text-red-400 hover:bg-red-500/10 hover:scale-110 transition-all"

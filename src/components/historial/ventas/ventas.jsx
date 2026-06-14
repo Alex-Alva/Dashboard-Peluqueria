@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// 1. Importamos createPortal para extraer el modal del árbol jerárquico limitado
 import { createPortal } from 'react-dom';
 import { Filter, Eye, Calendar, User, Search, X, ShoppingBag } from 'lucide-react';
 
-// Importar utilidades centralizadas
 import { 
   formatFechaLocal, 
   estaEnRangoFechas, 
@@ -13,7 +11,6 @@ import {
   sanitizeString 
 } from '../../../common/utils';
 
-// 1. Colección de Ventas Principales (Historial General del Salón)
 const DATOS_MOCK_VENTAS = [
   {
     id: 1,
@@ -57,7 +54,6 @@ const DATOS_MOCK_VENTAS = [
   }
 ];
 
-// 2. Desglose detallado por código de comprobante (Relación 1 a Muchos)
 const DATOS_MOCK_DETALLES = {
   "VTA-2026-001": [
     { id: 101, tipo: "servicio", cantidad: 1, precio_unitario: 75.00, descuento: 0.00, subtotal: 75.00 },
@@ -119,16 +115,13 @@ export default function Ventas() {
   };
 
   const ventasFiltradas = ventas.filter(v => {
-    // Filtro por método de pago
     if (filtroMetodo !== 'Todos' && v.metodo_pago !== filtroMetodo) return false;
 
-    // Filtro por nombre de cliente (manejo seguro de null/undefined)
     if (busquedaCliente) {
       const nombreCliente = sanitizeString(v.nombre_cliente, 'cliente general');
       if (!contieneTexto(nombreCliente, busquedaCliente)) return false;
     }
 
-    // Filtro por rango de fechas (usando utilidad segura)
     if (!estaEnRangoFechas(v.fecha, fechaInicio, fechaFin)) return false;
 
     return true;
@@ -136,15 +129,12 @@ export default function Ventas() {
 
   return (
     <div className="p-6 bg-white dark:bg-transparent transition-colors text-slate-600 dark:text-purple-100/80 animate-fadeIn">
-      {/* SECCIÓN DE FILTROS SUPERIORES */}
       <div className="mb-6 p-4 bg-slate-50 dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm flex flex-wrap gap-6 items-center">
         
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-purple-400/50">
           <Filter size={14} className="text-purple-600 dark:text-purple-400" />
           Filtros de Venta:
         </div>
-
-        {/* Buscador de Cliente */}
         <div className="flex items-center gap-2 text-xs bg-white dark:bg-[#121016]/60 border border-slate-200 dark:border-purple-950/60 px-3 py-1.5 rounded-sm w-full sm:w-64">
           <Search size={14} className="opacity-40 text-purple-600 dark:text-purple-400" />
           <input 
@@ -155,8 +145,6 @@ export default function Ventas() {
             className="bg-transparent outline-none w-full text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-purple-300/30"
           />
         </div>
-
-        {/* Filtrado por método de pago */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-light">
           <span className="opacity-50">Método:</span>
           <select
@@ -171,7 +159,6 @@ export default function Ventas() {
           </select>
         </div>
 
-        {/* Rango de Fechas */}
         <div className="flex items-center gap-2 text-xs font-light">
           <Calendar size={14} className="opacity-50 text-purple-600 dark:text-purple-400" />
           <input 
@@ -189,7 +176,6 @@ export default function Ventas() {
           />
         </div>
 
-        {/* Limpiar Filtros */}
         {(busquedaCliente || fechaInicio || fechaFin || filtroMetodo !== 'Todos') && (
           <button 
             type="button"
@@ -201,7 +187,6 @@ export default function Ventas() {
         )}
       </div>
 
-      {/* TABLA PRINCIPAL (VENTAS) */}
       <div className="border border-slate-200 dark:border-purple-950/40 rounded-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -264,14 +249,10 @@ export default function Ventas() {
           </tbody>
         </table>
       </div>
-
-      {/* MODAL DETALLE DE VENTA CON PORTAL */}
-      {/* Usamos createPortal para inyectar este modal directamente en la raíz del body */}
       {ventaSeleccionada && createPortal(
         <div className="fixed inset-0 bg-slate-950/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4 duration-200 animate-in fade-in">
           <div className="bg-white dark:bg-[#121016] border border-slate-200 dark:border-purple-950/60 w-full max-w-2xl shadow-2xl rounded-sm overflow-hidden duration-200 animate-in zoom-in-95">
             
-            {/* Cabecera del Modal */}
             <div className="p-4 bg-slate-50 dark:bg-[#121016]/90 border-b border-slate-200 dark:border-purple-950/40 flex justify-between items-center">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-purple-700 dark:text-purple-400">
                 <ShoppingBag size={14} /> Detalle de Artículos / Servicios
@@ -285,7 +266,6 @@ export default function Ventas() {
               </button>
             </div>
 
-            {/* Datos Generales de la Venta Abierta */}
             <div className="p-4 bg-slate-50/50 dark:bg-[#121016]/40 border-b border-slate-200/60 dark:border-purple-950/20 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
               <div>
                 <span className="block text-[9px] uppercase text-slate-400 dark:text-purple-400/40 tracking-widest mb-0.5">Código Comprobante</span>
@@ -301,7 +281,6 @@ export default function Ventas() {
               </div>
             </div>
 
-            {/* Contenido / Tabla del Detalle */}
             <div className="p-4 max-h-[350px] overflow-y-auto">
               {loadingDetalle ? (
                 <div className="p-10 text-center text-xs uppercase tracking-widest opacity-50 text-slate-400 dark:text-purple-400/40">
@@ -347,7 +326,6 @@ export default function Ventas() {
               )}
             </div>
 
-            {/* Pie de Modal / Totalizador */}
             <div className="p-4 bg-slate-50 dark:bg-[#121016]/90 border-t border-slate-200 dark:border-purple-950/40 flex justify-between items-center">
               <div className="text-left">
                 <span className="block text-[9px] uppercase tracking-widest text-slate-400 dark:text-purple-400/40 font-medium mb-0.5">Total Liquidado</span>

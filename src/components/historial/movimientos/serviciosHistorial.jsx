@@ -115,8 +115,6 @@ export default function HistoryServicio() {
 
   return (
     <div className="p-6 min-h-screen bg-slate-50 text-slate-600 dark:bg-[#121016] dark:text-purple-200 transition-colors duration-300 relative">
-      
-      {/* NOTIFICACIÓN FLOTANTE (TOAST) - GLASSMORPHISM */}
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' 
@@ -135,13 +133,11 @@ export default function HistoryServicio() {
         </div> 
       )}
 
-      {/* ENCABEZADO */}
       <div className="mb-6 flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-purple-600 dark:text-purple-400">
         <History size={16} />
         Log de Auditoría de Servicios
       </div>
 
-      {/* CONTENEDOR DE LA TABLA */}
       <div className="bg-white dark:bg-[#121016] border border-slate-200 dark:border-purple-950/40 rounded-xl shadow-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -209,7 +205,6 @@ export default function HistoryServicio() {
                       </div>
                     ) : (
                       <>
-                        {/* Render de Precios */}
                         {(m.valores_anteriores?.precio !== undefined || m.valores_actuales?.precio !== undefined) && (
                           <div className="flex items-center gap-2 text-slate-600 dark:text-purple-300">
                             <span className="opacity-60 w-14">Precio:</span>
@@ -223,7 +218,6 @@ export default function HistoryServicio() {
                           </div>
                         )}
 
-                        {/* Render de Duración */}
                         {(m.valores_anteriores?.duracion !== undefined || m.valores_actuales?.duracion !== undefined) && (
                           <div className="flex items-center gap-2 text-slate-600 dark:text-purple-300">
                             <span className="opacity-60 w-14">Duración:</span>
@@ -268,8 +262,6 @@ export default function HistoryServicio() {
           </tbody> 
         </table> 
       </div>
-
-      {/* MODAL DETALLES - GLASSMORPHISM EN FONDO */}
       {selectedLog && (
         <div className="fixed inset-0 z-50 bg-slate-900/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
           <div className="bg-white dark:bg-[#121016] border border-slate-200 dark:border-purple-950/50 p-6 rounded-2xl w-full max-w-md shadow-2xl animate-in zoom-in-95 duration-200">
@@ -316,7 +308,6 @@ export default function HistoryServicio() {
                   </div>
                 ) : (
                   <>
-                    {/* Bloque Precio Modificado */}
                     {(selectedLog.valores_anteriores?.precio !== undefined || selectedLog.valores_actuales?.precio !== undefined) && (
                       <div className="bg-slate-50 dark:bg-[#121016]/60 border border-slate-200 dark:border-purple-950/40 rounded-xl p-4">
                         <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 dark:text-purple-400/60 mb-2">Cambio de Precio</div>
@@ -338,7 +329,6 @@ export default function HistoryServicio() {
                       </div> 
                     )}
 
-                    {/* Bloque Duración Modificada */}
                     {(selectedLog.valores_anteriores?.duracion !== undefined || selectedLog.valores_actuales?.duracion !== undefined) && (
                       <div className="bg-slate-50 dark:bg-[#121016]/60 border border-slate-200 dark:border-purple-950/40 rounded-xl p-4">
                         <div className="text-[10px] uppercase tracking-widest font-bold text-slate-400 dark:text-purple-400/60 mb-2">Cambio de Duración</div>
@@ -363,7 +353,6 @@ export default function HistoryServicio() {
                 )} 
               </div>
 
-              {/* Botón de acción principal con gradiente neón solicitado */}
               <div className="pt-2">
                 <button 
                   onClick={() => setSelectedLog(null)}
@@ -372,7 +361,6 @@ export default function HistoryServicio() {
                   Entendido
                 </button>
               </div>
-
             </div> 
           </div>  
         </div> 

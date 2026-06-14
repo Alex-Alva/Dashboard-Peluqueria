@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { History, FileText, Scissors, Package } from 'lucide-react';
 
-// Importación de los componentes hijos
 import CierreCaja from '../components/historial/finanzas/cierreDeCaja';
 import Ventas from '../components/historial/ventas/ventas';
 import Citas from '../components/historial/citas/citas';
@@ -10,16 +9,12 @@ import HistoryServicio from '../components/historial/movimientos/serviciosHistor
 
 export default function HistoryGeneral() {
   const [activeTab, setActiveTab] = useState('financiero');
-  
-  // Filtros locales para pestañas específicas
   const [filtroMetodo, setFiltroMetodo] = useState('Todos');
   const [filtroEstado, setFiltroEstado] = useState('Todos');
   const [tipoVistaMov, setTipoVistaMov] = useState('Productos');
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#121016] p-8 text-slate-800 dark:text-purple-100/90 transition-colors duration-300">
-      
-      {/* HEADER */}
       <header className="mb-10">
         <h1 className="text-3xl font-light tracking-widest uppercase text-slate-900 dark:text-white">
           Módulo de Historiales <span className="text-purple-600 dark:text-purple-500">|</span>
@@ -29,7 +24,6 @@ export default function HistoryGeneral() {
         </p>
       </header>
 
-      {/* PESTAÑAS (TABS) */}
       <div className="flex flex-wrap border-b border-slate-200 dark:border-purple-950/40 mb-8 gap-1">
         {[
           { id: 'financiero', label: 'Cierres de Caja', icon: History },
@@ -56,10 +50,7 @@ export default function HistoryGeneral() {
         })}
       </div>
 
-      {/* CONTENEDOR GLOBAL */}
       <div className="bg-white dark:bg-[#121016]/60 dark:backdrop-blur-md border border-slate-200 dark:border-purple-950/40 rounded-sm shadow-xl overflow-hidden transition-colors">
-        
-        {/* Renderizado condicional de componentes hijos */}
         {activeTab === 'financiero' && (
           <CierreCaja />
         )}
@@ -80,7 +71,6 @@ export default function HistoryGeneral() {
 
         {activeTab === 'movimientos' && (
           <div className="animate-fadeIn">
-            {/* Sub-selector estilizado con efecto Glassmorphism */}
             <div className="px-6 py-4 bg-slate-50/50 dark:bg-[#121016]/80 border-b border-slate-200 dark:border-purple-950/40 flex gap-2">
               {['Productos', 'Servicios'].map(v => (
                 <button
@@ -96,8 +86,6 @@ export default function HistoryGeneral() {
                 </button>
               ))}
             </div>
-
-            {/* Componentes independientes conectados */}
             {tipoVistaMov === 'Productos' ? (
               <HistoryProductos />
             ) : (
@@ -105,7 +93,6 @@ export default function HistoryGeneral() {
             )}
           </div>
         )}
-
       </div>
     </div>
   );

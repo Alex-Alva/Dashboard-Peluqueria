@@ -28,7 +28,6 @@ export default function PagoDrawer({
 
   if (!showPago) return null;
 
-  // --- LÓGICA Y CÁLCULOS PARA PAGO SIMPLE ---
   const totalConComisionSimple = useMemo(() => {
     return metodo === 'tarjeta' ? total * 1.05 : total;
   }, [metodo, total]);
@@ -44,8 +43,6 @@ export default function PagoDrawer({
     return metodo === 'tarjeta' ? total : recibido;
   }, [montoPagoSimple, metodo, total]);
 
-
-  // --- LÓGICA Y CÁLCULOS PARA PAGO MIXTO ---
   const resumenMixto = useMemo(() => {
     let abonoRealTotal = 0;
     let totalCobradoConComisiones = 0;
@@ -87,7 +84,6 @@ export default function PagoDrawer({
 
   const metodosYaUtilizados = pagosMixtos.map(p => p.tipo);
 
-  // --- MANIPULACIÓN DEL ESTADO MIXTO ---
   const actualizarPagoMixto = (index, campo, valor) => {
     const copia = [...pagosMixtos];
     copia[index][campo] = valor;
@@ -110,7 +106,6 @@ export default function PagoDrawer({
     setPagosMixtos([{ tipo: 'efectivo', monto: '' }]);
   };
 
-  // --- MANEJADOR DE CONFIRMACIÓN DE PAGO ---
   const handleConfirmar = () => {
     if (metodo !== 'mixto') {
       const esTarjeta = metodo === 'tarjeta';
@@ -134,19 +129,16 @@ export default function PagoDrawer({
 
   return (
     <>
-      {/* Backdrop */}
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 0.4 }} exit={{ opacity: 0 }}
         onClick={() => { resetearModuloPago(); setShowPago(false); }}
         className="absolute inset-0 bg-black/40 z-40"
       />
 
-      {/* Panel deslizable */}
       <motion.div 
         initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         className="absolute right-0 top-0 bottom-0 w-[26rem] bg-white dark:bg-[#121016] border-l border-slate-200 dark:border-purple-950/40 shadow-2xl z-50 flex flex-col p-6 overflow-y-auto"
       >
-        {/* CABECERA */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-purple-950/30 mb-6 flex-shrink-0">
           <button 
             type="button"
@@ -158,7 +150,6 @@ export default function PagoDrawer({
           <span className="font-bold text-xs tracking-wider uppercase text-slate-400 dark:text-zinc-500">Procesar Pago</span>
         </div>
 
-        {/* VISUALIZACIÓN DEL MONTO TOTAL DINÁMICO */}
         <div className="flex flex-col items-center mb-6 bg-purple-600/5 dark:bg-purple-400/5 border border-purple-600/10 dark:border-purple-400/10 rounded-2xl py-5 w-full flex-shrink-0">
           <span className="text-slate-400 dark:text-zinc-500 text-xs font-bold uppercase tracking-wider mb-1">Monto de la Venta</span>
           <h1 className="text-4xl font-black text-purple-600 dark:text-purple-400">
@@ -171,7 +162,6 @@ export default function PagoDrawer({
           )}
         </div>
 
-        {/* CUADRÍCULA DE MÉTODOS SIMPLES */}
         <div className="flex flex-col gap-2.5 mb-4 flex-shrink-0">
           <span className="font-bold text-xs tracking-wider uppercase text-slate-400 dark:text-zinc-500">Método de Pago</span>
           <div className="grid grid-cols-2 gap-2">
@@ -197,8 +187,6 @@ export default function PagoDrawer({
             })}
           </div>
         </div>
-
-        {/* BOTÓN INDEPENDIENTE PARA PAGO MIXTO */}
         <button 
           type="button"
           onClick={() => setMetodo('mixto')}
@@ -208,11 +196,8 @@ export default function PagoDrawer({
             <Layers size={15} /> <span>Habilitar Pago Mixto</span>
           </div>
         </button>
-
-        {/* CONTENIDO INTERACTIVO PRINCIPAL */}
         <div className="mb-6 flex-shrink-0">
           {metodo !== 'mixto' ? (
-            /* --- RENDER PAGO SIMPLE --- */
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <span className="font-bold text-xs tracking-wider uppercase text-slate-400 dark:text-zinc-500">Monto Recibido</span>
@@ -243,7 +228,6 @@ export default function PagoDrawer({
               </div>
             </div>
           ) : (
-            /* --- RENDER PAGO MIXTO --- */
             <div className="flex flex-col gap-4">
               <span className="font-bold text-xs tracking-wider uppercase text-slate-400 dark:text-zinc-500 block">Distribución de Canales</span>
               
@@ -301,8 +285,6 @@ export default function PagoDrawer({
                   + Agregar otro método de pago
                 </button>
               )}
-
-              {/* RESUMEN MIXTO */}
               <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#121016]/40 border border-slate-200 dark:border-purple-950/30 text-xs flex flex-col gap-2 mt-2">
                 <div className="flex justify-between font-medium">
                   <span className="text-slate-400 dark:text-zinc-500">Deuda Cubierta Real:</span>
@@ -336,7 +318,6 @@ export default function PagoDrawer({
           )}
         </div>
 
-        {/* ACCIONES DEL PIE */}
         <div className="p-4 border-t border-slate-200 dark:border-purple-950/30 bg-slate-50/50 dark:bg-purple-950/10 rounded-xl flex flex-col gap-2.5 mt-auto flex-shrink-0">
           <button 
             type="button"

@@ -13,8 +13,6 @@ const FilterBar = ({ filters, setFilters }) => {
 
   return (
     <div className="w-full flex flex-wrap items-center gap-4 p-4 bg-white dark:bg-[#121016]/60 dark:backdrop-blur-md transition-colors duration-300">
-      
-      {/* Input de Búsqueda Minimalista */}
       <div className="relative flex-grow max-w-xs group">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-purple-400/50 group-focus-within:text-purple-500 transition-colors">
           <Search size={16} />
@@ -28,8 +26,6 @@ const FilterBar = ({ filters, setFilters }) => {
           className="w-full bg-transparent text-xs text-slate-900 dark:text-white border border-slate-200 dark:border-purple-950/40 rounded-xl py-2.5 pl-9 pr-4 outline-none focus:border-purple-500 dark:focus:border-purple-500 transition-all placeholder:text-slate-400 dark:placeholder:text-purple-400/30"
         />
       </div>
-
-      {/* Select Frecuencia */}
       <div className="relative group">
         <Clock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-purple-400/50 group-focus-within:text-purple-500 transition-colors" size={16} />
         <select
@@ -46,7 +42,6 @@ const FilterBar = ({ filters, setFilters }) => {
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none w-1.5 h-1.5 border-r-2 border-b-2 border-slate-400 dark:border-purple-400/40 rotate-45" />
       </div>
 
-      {/* Select Visitas */}
       <div className="relative group">
         <Box className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-purple-400/50 group-focus-within:text-purple-500 transition-colors" size={16} />
         <select
@@ -63,8 +58,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </select>
         <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none w-1.5 h-1.5 border-r-2 border-b-2 border-slate-400 dark:border-purple-400/40 rotate-45" />
       </div>
-
-      {/* Botón Limpiar Estilizado (Dark/Light mode correcto) */}
       <button 
         onClick={handleReset}
         className="flex items-center gap-2 px-4 py-2.5 ml-auto border border-slate-200 dark:border-purple-950/40 rounded-xl text-xs uppercase tracking-wider font-bold text-slate-600 dark:text-purple-400 bg-slate-50 dark:bg-[#121016] hover:bg-purple-600 hover:text-white dark:hover:bg-purple-600 dark:hover:text-white transition-all duration-200 shadow-sm"

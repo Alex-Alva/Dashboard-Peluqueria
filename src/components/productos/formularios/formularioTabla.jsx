@@ -14,7 +14,6 @@ export default function FormularioT({ isOpen, onClose, categorias = [] }) {
   });
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '', tipo: 'info' });
 
-  // Calcular ganancia en tiempo real convirtiendo de forma segura a números
 const ganancia =
   (parseFloat(form.precio) || 0) -
   (parseFloat(form.costo) || 0);
@@ -77,7 +76,6 @@ const handleChange = (e) => {
   };
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
-      {/* Toast Notificación */}
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-2xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-500' :
@@ -96,7 +94,6 @@ const handleChange = (e) => {
         </div> 
       )}
 
-      {/* Contenedor Modal */}
       <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden rounded-3xl border border-slate-200 dark:border-purple-950/40 bg-white dark:bg-[#121016]/95 dark:backdrop-blur-md shadow-2xl text-slate-900 dark:text-slate-300">
         
         {/* Header */}
@@ -118,12 +115,10 @@ const handleChange = (e) => {
           </button>
         </div>
 
-        {/* Formulario */}
         <form
           onSubmit={handleSubmit}
           className="flex-1 overflow-y-auto p-6 space-y-5 scrollbar-thin scrollbar-thumb-purple-600/40 scrollbar-track-transparent bg-white dark:bg-transparent"
         >
-          {/* Nombre */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <Tag size={16} className="text-purple-600 dark:text-purple-500" />
@@ -140,7 +135,6 @@ const handleChange = (e) => {
             />
           </div>
 
-          {/* Costo, Precio y Stock */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
@@ -195,7 +189,6 @@ const handleChange = (e) => {
               />
             </div>
           </div>
-          {/* Ganancia / Pérdida Calculada de forma Dinámica */}
           <div className={`rounded-2xl border-2 border-dashed transition-colors duration-300 p-4 ${
             esPerdida 
               ? "border-red-500/40 bg-red-500/5 dark:bg-red-500/10" 
@@ -214,14 +207,14 @@ const handleChange = (e) => {
                   {esPerdida ? "Margen de Pérdida:" : "Ganancia Estimada:"}
                 </span>
               </div>
-<span className={`text-2xl font-bold transition-colors ${
-    esPerdida
-      ? "text-red-500 dark:text-red-400"
-      : "text-emerald-600 dark:text-emerald-400"
-  }`}
->
-  {ganancia}
-</span>
+            <span className={`text-2xl font-bold transition-colors ${
+                esPerdida
+                  ? "text-red-500 dark:text-red-400"
+                  : "text-emerald-600 dark:text-emerald-400"
+              }`}
+            >
+              {ganancia}
+            </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 ml-10">
               {esPerdida 
@@ -229,7 +222,6 @@ const handleChange = (e) => {
                 : "Se calcula automáticamente: Precio Venta - Costo"}
             </p>
           </div>
-          {/* Imagen */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <ImageIcon size={16} className="text-purple-600 dark:text-purple-500" />
@@ -244,8 +236,6 @@ const handleChange = (e) => {
               className="w-full rounded-2xl border border-slate-200 dark:border-purple-950/40 bg-slate-50 dark:bg-[#121016] p-4 text-slate-900 dark:text-white file:mr-4 file:rounded-xl file:border-0 file:bg-purple-600 file:px-4 file:py-2 file:text-white file:font-semibold hover:file:bg-purple-700 transition"
             />
           </div>
-
-          {/* Categoría y Estado */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
@@ -284,8 +274,6 @@ const handleChange = (e) => {
               </select>
             </div>
           </div>
-
-          {/* Descripción */}
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
               <FileText size={16} className="text-purple-600 dark:text-purple-500" />
@@ -301,8 +289,6 @@ const handleChange = (e) => {
               className="w-full resize-none rounded-2xl border border-slate-200 dark:border-purple-950/40 bg-slate-50 dark:bg-[#121016]/40 p-4 text-slate-900 dark:text-white outline-none transition focus:border-purple-600 dark:focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10"
             />
           </div>
-
-          {/* Botón de Enviar (Efecto neón) */}
           <button
             type="submit"
             className="w-full shrink-0 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-600 p-4 font-bold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-indigo-500/20 flex items-center justify-center gap-2"

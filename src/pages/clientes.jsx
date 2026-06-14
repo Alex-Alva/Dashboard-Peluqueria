@@ -11,11 +11,9 @@ const Clientes = () => {
   const [refresh, setRefresh] = useState(false);
   const [filters, setFilters] = useState({ search: '', frecuencia: '', visitas: '' });
 
-  // Control centralizado de modales
   const [modalConfig, setModalConfig] = useState({ tipo: null, isOpen: false });
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
 
-  // Estado para la notificación simulación (Toast global)
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '' });
 
   useEffect(() => {
@@ -54,8 +52,6 @@ const Clientes = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-600 dark:bg-[#121016] dark:text-purple-200 transition-colors duration-300 relative">
-      
-      {/* TOAST GLOBAL DEL PADRE - GLASSMORPHISM CON #121016/80 */}
       {notificacion.visible && (
         <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 bg-white/90 dark:bg-[#121016]/80 border-slate-200 dark:border-purple-950/40 text-purple-600 dark:text-purple-400">
           <CheckCircle2 size={18} />
@@ -71,15 +67,11 @@ const Clientes = () => {
       )}
 
       <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
-        {/* HEADER */}
         <ClientesHeader onOpenModal={() => abrirModal('crear')} />
-
-        {/* FILTROS */}
         <section className="bg-white dark:bg-[#121016]/60 dark:backdrop-blur-md p-1 rounded-2xl border border-slate-200 dark:border-purple-950/40 shadow-sm overflow-hidden">
           <FilterBar filters={filters} setFilters={setFilters} />
         </section>
 
-        {/* TABLA PRINCIPAL */}
         <main className="bg-white dark:bg-[#121016] rounded-2xl border border-slate-200 dark:border-purple-950/40 shadow-md overflow-hidden">
           <ClientesTable
             filters={filters}
@@ -89,14 +81,12 @@ const Clientes = () => {
         </main>
       </div>
 
-      {/* MODAL 1: FORMULARIO DE CREACIÓN */}
       <FormularioCliente
         isOpen={modalConfig.isOpen && modalConfig.tipo === 'crear'}
         onClose={cerrarModal}
         onSubmit={handleSaveCliente}
       />
 
-      {/* MODAL 2: FORMULARIO DE EDICIÓN */}
       <FormularioEditar
         isOpen={modalConfig.isOpen && modalConfig.tipo === 'editar'}
         cliente={clienteSeleccionado}
@@ -104,7 +94,6 @@ const Clientes = () => {
         onSubmit={handleUpdateCliente}
       />
 
-      {/* MODAL 3: CAPA VISUAL DE DETALLES */}
       <FormularioVer
         isOpen={modalConfig.isOpen && modalConfig.tipo === 'ver'}
         cliente={clienteSeleccionado}

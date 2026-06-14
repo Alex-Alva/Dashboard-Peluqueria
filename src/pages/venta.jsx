@@ -3,7 +3,6 @@ import { AnimatePresence } from 'framer-motion';
 import { User, Scissors, Package } from 'lucide-react';
 import { pdf } from '@react-pdf/renderer';
 
-// Importación de sub-componentes
 import HeaderActions from '../components/venta/HeaderActions';
 import MenuLateral from '../components/venta/MenuLateral';
 import ClientesPanel from '../components/venta/ClientesPanel';
@@ -13,20 +12,17 @@ import DetalleVenta from '../components/venta/DetallesVenta';
 import PagoDrawer from '../components/venta/PagoDrawer';
 import { BoletaPDF } from '../components/venta/pdf/pdf';
 
-// MOCKS
 const MOCK_SERVICIOS = [
   { id: 's1', nombre: 'Corte de Cabello Premium', precio: 45.00, tiempo: '30 min' },
   { id: 's2', nombre: 'Tinte & Coloración Global', precio: 120.00, tiempo: '90 min' },
   { id: 's3', nombre: 'Tratamiento de Hidratación', precio: 75.00, tiempo: '45 min' },
   { id: 's4', nombre: 'Manicure Express', precio: 30.00, tiempo: '20 min' },
 ];
-
 const MOCK_PRODUCTOS = [
   { id: 'p1', nombre: 'Shampoo Matizador Gold', precio: 65.00, stock: 12 },
   { id: 'p2', nombre: 'Cera Modeladora Mate', precio: 40.00, stock: 8 },
   { id: 'p3', nombre: 'Óleo de Argán Reparador', precio: 95.00, stock: 5 },
 ];
-
 const MOCK_CLIENTES = [
   { id: 'c1', nombre: 'Valeria Mendoza', telefono: '987 654 321', email: 'valeria@mail.com' },
   { id: 'c2', nombre: 'Carlos Torres', telefono: '912 345 678', email: 'carlos@mail.com' },
@@ -63,8 +59,6 @@ const finalizarYDescargarPago = async (detallesPago) => {
     try {
       const dataPDF = {
         fecha: new Date().toLocaleDateString('es-PE', { hour: '2-digit', minute: '2-digit' }),
-        
-        // 1. Corregimos para que use el método real seleccionado en el Drawer
         metodoPago: detallesPago?.metodo || 'efectivo', 
         
         nombreCliente: ventaActual.cliente ? ventaActual.cliente.nombre : 'Cliente General',
@@ -77,12 +71,7 @@ const finalizarYDescargarPago = async (detallesPago) => {
         subtotal: ventaActual.total * 0.82,
         descuento: detallesPago?.descuento || 0,
         comision: detallesPago?.comision || 0,
-        
-        // 2. PASAMOS EL MONTO RECIBIDO AL PDF (viene desde el PagoDrawer)
         montoRecibido: detallesPago?.montoRecibido || 0, 
-
-        // Nota: Si el pago es con tarjeta o mixto, ajustamos el totalFinal 
-        // sumándole la comisión cobrada si es que tu PDF debe reflejar el neto + comisión.
         totalFinal: ventaActual.total + (detallesPago?.comision || 0)
       };
 

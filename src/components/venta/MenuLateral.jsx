@@ -4,8 +4,6 @@ import { Sidebar } from 'lucide-react';
 export default function MenuLateral({ menuActivo, setMenuActivo, opciones }) {
   return (
     <div className="w-16 bg-white dark:bg-[#121016]/40 border-r border-slate-200 dark:border-purple-950/40 flex flex-col justify-between items-center py-4 z-30 backdrop-blur-md">
-      
-      {/* Grupo superior de botones de navegación */}
       <div className="flex flex-col items-center gap-3 w-full">
         {opciones.map(btn => {
           const Icon = btn.icon;
@@ -24,7 +22,6 @@ export default function MenuLateral({ menuActivo, setMenuActivo, opciones }) {
         })}
       </div>
 
-      {/* Botón inferior maestro */}
       <div className="w-full pt-4 border-t border-slate-100 dark:border-purple-950/20 flex justify-center">
         <button
           onClick={() => setMenuActivo(menuActivo ? null : 'cliente')}
@@ -34,7 +31,6 @@ export default function MenuLateral({ menuActivo, setMenuActivo, opciones }) {
           <Sidebar size={20} className={`transition-transform duration-200 ${!menuActivo ? 'rotate-180 text-purple-600 dark:text-purple-400' : ''}`} />
         </button>
       </div>
-
     </div>
   );
 }

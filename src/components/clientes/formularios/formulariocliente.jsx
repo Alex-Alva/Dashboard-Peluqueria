@@ -46,7 +46,6 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
 
   return (
     <>
-      {/* Toast Flotante Contextualizado */}
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-xl shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' ? 'bg-purple-600/10 border-purple-500/30 text-purple-600 dark:text-purple-400' :
@@ -64,13 +63,9 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
           </button>
         </div>
       )}
-
-      {/* Modal Principal */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
           <div className="relative w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden rounded-[24px] border border-purple-950/40 bg-white dark:bg-[#121016] shadow-2xl">
-            
-            {/* Header */}
             <div className="flex items-center justify-between border-b border-purple-950/40 px-6 py-5 shrink-0 bg-gradient-to-b from-purple-600/[0.03] to-transparent">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-600/10 rounded-xl border border-purple-500/20 text-purple-600 dark:text-purple-400">
@@ -90,11 +85,7 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
                 <X size={16} />
               </button>
             </div>
-
-            {/* Formulario */}
             <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-4 text-xs scrollbar-thin scrollbar-thumb-purple-500/20">
-              
-              {/* Campo Nombre */}
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
                   <User size={13} className="text-purple-600 dark:text-purple-400" /> Nombre Completo <span className="text-purple-500">*</span>
@@ -109,8 +100,6 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
                   className="w-full text-xs rounded-xl border border-gray-200 dark:border-purple-950/40 bg-transparent p-3.5 text-black dark:text-white outline-none focus:border-purple-500 dark:focus:border-purple-500 transition"
                 />
               </div>
-
-              {/* Campo Teléfono */}
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
                   <Phone size={13} className="text-purple-600 dark:text-purple-400" /> Número de Contacto
@@ -124,8 +113,6 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
                   className="w-full text-xs font-mono rounded-xl border border-gray-200 dark:border-purple-950/40 bg-transparent p-3.5 text-black dark:text-white outline-none focus:border-purple-500 dark:focus:border-purple-500 transition"
                 />
               </div>
-
-              {/* Campo Correo */}
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
                   <Mail size={13} className="text-purple-600 dark:text-purple-400" /> Correo Electrónico
@@ -139,8 +126,6 @@ export default function FormularioCliente({ isOpen, onClose, onSubmit }) {
                   className="w-full text-xs rounded-xl border border-gray-200 dark:border-purple-950/40 bg-transparent p-3.5 text-black dark:text-white outline-none focus:border-purple-500 dark:focus:border-purple-500 transition"
                 />
               </div>
-
-              {/* Acciones */}
               <div className="flex gap-3 pt-4 shrink-0">
                 <button
                   type="button"

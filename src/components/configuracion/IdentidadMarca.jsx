@@ -12,8 +12,6 @@ export default function IdentidadMarca({ nombreSistema, setNombreSistema, logoUr
           Identidad de Marca
         </h2>
       </div>
-
-      {/* Nombre del Sistema */}
       <div className="mb-6">
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Nombre del Sistema
@@ -27,7 +25,6 @@ export default function IdentidadMarca({ nombreSistema, setNombreSistema, logoUr
         />
       </div>
 
-      {/* Logo Upload */}
       <div>
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Logo del Sistema

@@ -8,12 +8,8 @@ import {
   toNumber
 } from '../../../common/utils';
 
-// =========================================================================
-// OBTENCIÓN DE FECHA LOCAL ESTÁNDAR (Evita desfases por zona horaria UTC)
-// =========================================================================
-const hoyLocal = new Date().toLocaleDateString('sv-SE'); // "YYYY-MM-DD"
+const hoyLocal = new Date().toLocaleDateString('sv-SE');
 
-// Datos de prueba simulados dinámicamente sincronizados con el día de hoy local
 const DATOS_MOCK_CIERRES = [
   {
     id: 101,
@@ -26,7 +22,7 @@ const DATOS_MOCK_CIERRES = [
     yape_contado: 350.00,
     tarjeta_contado: 200.00,
     plin_contado: 150.00,
-    diferencia: 0.00 // Cuadrado perfecto
+    diferencia: 0.00
   },
   {
     id: 102,
@@ -39,7 +35,7 @@ const DATOS_MOCK_CIERRES = [
     yape_contado: 400.00,
     tarjeta_contado: 200.00,
     plin_contado: 140.00,
-    diferencia: -30.00 // Faltante
+    diferencia: -30.00
   },
   {
     id: 103,
@@ -52,18 +48,14 @@ const DATOS_MOCK_CIERRES = [
     yape_contado: 210.00,
     tarjeta_contado: 100.00,
     plin_contado: 70.00,
-    diferencia: 20.00 // Sobrante
+    diferencia: 20.00
   }
 ];
 
 export default function CierreCaja() {
   const [filtroEstado, setFiltroEstado] = useState('Todos');
-  
-  // =========================================================================
-  // ESTADOS DE FILTRO DE FECHA - Inicializados estratégicamente para englobar el rango
-  // =========================================================================
-  const [fechaInicio, setFechaInicio] = useState('2026-05-01'); // Primer día de los mocks de Mayo
-  const [fechaFin, setFechaFin] = useState(hoyLocal);          // Hasta el día de hoy dinámicamente
+  const [fechaInicio, setFechaInicio] = useState('2026-05-01');
+  const [fechaFin, setFechaFin] = useState(hoyLocal);    
 
   const [cierresCaja, setCierresCaja] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -109,8 +101,6 @@ export default function CierreCaja() {
     if (diferencia > 0) estadoCalculado = 'Sobrante';
 
     if (filtroEstado !== 'Todos' && estadoCalculado !== filtroEstado) return false;
-
-    // Usar utilidad robusta de rango de fechas sin conflicto de desfase horario
     if (!estaEnRangoFechas(c.fecha_apertura, fechaInicio, fechaFin ? fechaFin + 'T23:59:59' : null)) return false;
 
     return true;
@@ -118,8 +108,6 @@ export default function CierreCaja() {
 
   return (
     <div className="p-6 bg-white dark:bg-transparent transition-colors text-slate-600 dark:text-purple-100/80 relative animate-fadeIn">
-      
-      {/* NOTIFICACIÓN FLOTANTE (TOAST) GLASSMORPHIC */}
       {notificacion.visible && (
         <div className={`fixed bottom-5 right-5 z-[60] flex items-center gap-3 p-4 rounded-sm shadow-2xl border backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300 ${
           notificacion.tipo === 'success' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' :
@@ -137,15 +125,12 @@ export default function CierreCaja() {
           </button>
         </div>
       )}
-      
-      {/* SECCIÓN DE FILTROS SUPERIORES */}
       <div className="mb-6 p-4 bg-slate-50 dark:bg-[#121016]/80 border border-slate-200 dark:border-purple-950/40 rounded-sm flex flex-wrap gap-6 items-center">
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-purple-400/50">
           <Filter size={14} className="text-purple-600 dark:text-purple-400" />
           Filtros de Auditoría:
         </div>
 
-        {/* Rango de Fechas */}
         <div className="flex items-center gap-2 text-xs font-light">
           <Calendar size={14} className="opacity-50 text-purple-600 dark:text-purple-400" />
           <input 
@@ -163,7 +148,6 @@ export default function CierreCaja() {
           />
         </div>
 
-        {/* Filtro por estado */}
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest font-light">
           <span className="opacity-50">Estado:</span>
           <select 
@@ -177,8 +161,6 @@ export default function CierreCaja() {
             <option value="Sobrante">Sobrante</option>
           </select>
         </div>
-
-        {/* Botón Limpiar Filtros */}
         {(fechaInicio !== '2026-05-01' || fechaFin !== hoyLocal || filtroEstado !== 'Todos') && (
           <button 
             onClick={() => { setFechaInicio('2026-05-01'); setFechaFin(hoyLocal); setFiltroEstado('Todos'); }}
@@ -189,7 +171,6 @@ export default function CierreCaja() {
         )}
       </div>
 
-      {/* TABLA DE CONTENIDO PRINCIPAL */}
       <div className="border border-slate-200 dark:border-purple-950/40 rounded-sm overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -265,12 +246,10 @@ export default function CierreCaja() {
         </table>
       </div>
 
-      {/* MODAL / DETALLE CON BLUR E IDENTIDAD PURPLE */}
       {cierreSeleccionado && createPortal(
         <div className="fixed inset-0 bg-slate-950/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] p-4 duration-200 animate-in fade-in">
           <div className="bg-white dark:bg-[#121016] border border-slate-200 dark:border-purple-950/60 w-full max-w-md shadow-2xl rounded-sm overflow-hidden duration-200 animate-in zoom-in-95">
             
-            {/* Cabecera del Detalle */}
             <div className="p-4 bg-slate-50 dark:bg-[#121016]/90 border-b border-slate-200 dark:border-purple-950/40 flex justify-between items-center">
               <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-purple-700 dark:text-purple-400">
                 <DollarSign size={14} /> Desglose Físico Completo
@@ -284,9 +263,7 @@ export default function CierreCaja() {
               </button>
             </div>
 
-            {/* Cuerpo del Modal */}
             <div className="p-6 space-y-5">
-              {/* Fechas de gestión */}
               <div className="grid grid-cols-2 gap-4 border-b border-slate-100 dark:border-purple-950/20 pb-4">
                 <div>
                   <span className="block text-[9px] uppercase tracking-widest text-slate-400 dark:text-purple-400/40 font-medium mb-0.5">Fecha Apertura</span>
@@ -298,7 +275,6 @@ export default function CierreCaja() {
                 </div>
               </div>
 
-              {/* Métodos Desglosados */}
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-xs border-b border-slate-100 dark:border-purple-950/20 pb-2">
                   <span className="opacity-60 font-light uppercase tracking-wide">Base Inicial en Caja:</span>
@@ -327,7 +303,6 @@ export default function CierreCaja() {
                 </div>
               </div>
 
-              {/* Bloque Totalizador */}
               <div className="pt-2 grid grid-cols-2 gap-4 text-center">
                 <div className="p-2 bg-emerald-500/5 border border-emerald-500/10 rounded-sm">
                   <span className="block text-[9px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400/60 font-medium mb-0.5">Total Sistema</span>
@@ -342,7 +317,6 @@ export default function CierreCaja() {
               </div>
             </div>
 
-            {/* Footer Modal */}
             <div className="p-3 bg-slate-50 dark:bg-[#121016]/90 border-t border-slate-200 dark:border-purple-950/40 text-right">
               <button 
                 type="button"
@@ -357,7 +331,6 @@ export default function CierreCaja() {
         </div>,
         document.body
       )}
-
     </div>
   );
 }

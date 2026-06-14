@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import { Landmark, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
-
-// Importación de los componentes hijos basados en la estructura financiera
 import CierreCaja from '../components/finanzas/cierredecaja/cierreCaja';
 import Egresos from '../components/finanzas/egresos/egresos'; 
 import Ingresos from '../components/finanzas/ingresos/ingresos'; 
 
 export default function FinanzasGeneral() {
-  // Inicializa con 'cierre' para que sea la primera vista en renderizarse
   const [activeTab, setActiveTab] = useState('cierre');
-  
-  // Filtros globales compartidos opcionales en caso de que tus hijos los requieran
   const [filtroMetodoPago, setFiltroMetodoPago] = useState('Todos');
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#121016] p-8 text-slate-800 dark:text-purple-100/90 transition-colors duration-300">
-      
-      {/* HEADER */}
       <header className="mb-10">
         <h1 className="text-3xl font-light tracking-widest uppercase text-slate-900 dark:text-white">
           Gestión Financiera <span className="text-purple-600 dark:text-purple-500">|</span>
@@ -26,7 +19,6 @@ export default function FinanzasGeneral() {
         </p>
       </header>
 
-      {/* PESTAÑAS (TABS) */}
       <div className="flex flex-wrap border-b border-slate-200 dark:border-purple-950/40 mb-8 gap-1">
         {[
           { id: 'cierre', label: 'Cierres de Caja', icon: Landmark },
@@ -52,9 +44,7 @@ export default function FinanzasGeneral() {
         })}
       </div>
 
-      {/* VISTA CONTENEDORA */}
       <div className="animate-fadeIn">
-        {/* Renderizado condicional de las vistas financieras */}
         {activeTab === 'cierre' && (
           <CierreCaja />
         )}
@@ -70,7 +60,6 @@ export default function FinanzasGeneral() {
           <Egresos />
         )}
       </div>
-
     </div>
   );
 }

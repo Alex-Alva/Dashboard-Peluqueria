@@ -47,7 +47,6 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
       <div className="relative w-full max-w-md max-h-[90vh] flex flex-col overflow-hidden rounded-[24px] border border-purple-950/40 bg-white dark:bg-[#121016] shadow-2xl">
 
-        {/* Header */}
         <div className="flex items-center justify-between border-b border-purple-950/40 px-6 py-5 shrink-0 bg-gradient-to-b from-purple-600/[0.03] to-transparent">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-purple-600/10 rounded-xl border border-purple-500/20 text-purple-600 dark:text-purple-400">
@@ -63,10 +62,7 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
           </button>
         </div>
 
-        {/* Formulario */}
         <form onSubmit={handleFormSubmit} className="flex-1 overflow-y-auto p-6 space-y-4 text-xs scrollbar-thin scrollbar-thumb-purple-500/20">
-          
-          {/* Nombre */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
               <User size={13} className="text-purple-600 dark:text-purple-400" /> Nombre Completo <span className="text-purple-500">*</span>
@@ -82,7 +78,6 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
             />
           </div>
 
-          {/* Teléfono */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
               <Phone size={13} className="text-purple-600 dark:text-purple-400" /> Teléfono fijo / Móvil
@@ -97,7 +92,6 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
             />
           </div>
 
-          {/* Correo */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
               <Mail size={13} className="text-purple-600 dark:text-purple-400" /> Email corporativo
@@ -112,7 +106,6 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
             />
           </div>
 
-          {/* Notas */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-600 dark:text-zinc-400 flex items-center gap-2">
               <MessageSquare size={13} className="text-purple-600 dark:text-purple-400" /> Comentarios de seguimiento
@@ -128,7 +121,6 @@ export default function FormularioEditar({ isOpen, onClose, onSubmit, cliente })
             />
           </div>
 
-          {/* Botonera con degradado para acción principal */}
           <div className="flex gap-3 pt-4 shrink-0">
             <button type="button" onClick={onClose} className="flex-1 py-3 rounded-xl bg-slate-50 dark:bg-white/5 font-bold text-gray-500 dark:text-gray-300 transition hover:bg-slate-100 dark:hover:bg-white/10 text-xs uppercase tracking-wider">
               Descartar

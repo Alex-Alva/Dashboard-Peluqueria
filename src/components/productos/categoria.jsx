@@ -16,7 +16,6 @@ const CategoryProductos = ({
   onCategoriasLoad
 }) => {
 
-  // 1. ✅ OPTIMIZADO: Inicialización Lazy. Carga síncrona al primer render
   const [categorias, setCategorias] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return JSON.parse(saved);
@@ -41,7 +40,6 @@ const CategoryProductos = ({
   const [editId, setEditId] = useState(null);
   const [originalName, setOriginalName] = useState('');
 
-  // Lee los productos reales (del LocalStorage si existen) para que los contadores sean verídicos
   const productosActuales = useMemo(() => {
     try {
       const guardados = localStorage.getItem("productos");
@@ -49,9 +47,7 @@ const CategoryProductos = ({
     } catch {
       return productosData;
     }
-  }, []); // Solo lee al montar el componente de categorías
-
-  // 2. ✅ OPTIMIZADO: Estructura memorizada de forma segura
+  }, []); 
   const categoriasConContador = useMemo(() => {
     const totalProductos = productosActuales.length;
     
@@ -68,21 +64,16 @@ const CategoryProductos = ({
     });
   }, [categorias, productosActuales]);
 
-  // 3. ✅ OPTIMIZADO: Guardado controlado en LocalStorage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(categorias));
   }, [categorias]);
 
-  // 4. ✅ CORREGIDO: Evita el bucle infinito controlando la emisión de los datos al padre
-  // Usamos strings JSON para comparar si el contenido real mutó, ignorando cambios de referencia en memoria
   const stringVerificacion = JSON.stringify(categoriasConContador);
   
   useEffect(() => {
     onCategoriasLoad?.(categoriasConContador);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stringVerificacion, onCategoriasLoad]);
 
-  // SELECCIONAR
   const seleccionarCategoria = (id) => {
     setCategorias(prev => prev.map(cat => ({
       ...cat,
@@ -91,7 +82,6 @@ const CategoryProductos = ({
     onCategoriaChange?.(id);
   };
 
-  // NUEVA CATEGORIA
   const handleNew = () => {
     setShowForm(prev => !prev);
     setEditId(null);
@@ -100,7 +90,6 @@ const CategoryProductos = ({
     setMenuOpen(null);
   };
 
-  // EDITAR
   const handleEdit = (cat) => {
     setShowForm(true);
     setNewCat(cat.nombre);
@@ -109,15 +98,12 @@ const CategoryProductos = ({
     setMenuOpen(null);
   };
 
-  // CANCELAR
   const handleCancel = () => {
     setShowForm(false);
     setNewCat('');
     setEditId(null);
     setOriginalName('');
   };
-
-  // GUARDAR
   const handleSave = () => {
     const nombreLimpio = newCat.trim();
     if (!nombreLimpio) return;
@@ -158,7 +144,6 @@ const CategoryProductos = ({
   return (
     <div className="w-full h-full max-h-[calc(100vh-3rem)] overflow-y-auto p-5 rounded-3xl bg-white dark:bg-[#121016] border border-purple-950/20 dark:border-purple-950/40 shadow-2xl">
 
-      {/* HEADER */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-purple-950/20 dark:border-purple-950/40">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-purple-600/10 border border-purple-600/20">
@@ -176,7 +161,6 @@ const CategoryProductos = ({
         </button>
       </div>
 
-      {/* FORMULARIO */}
       {showForm && (
         <CategoriaFormulario
           newCat={newCat}
@@ -188,7 +172,6 @@ const CategoryProductos = ({
         /> 
       )}
 
-      {/* LISTA DINÁMICA */}
       <ul className="space-y-1.5">
         {categoriasConContador.map((cat) => (
           <li key={cat.id ?? 'todos'} className="relative">

@@ -27,7 +27,6 @@ export default function HeaderActions({ ventas, ventaActivaId, setVentaActivaId,
             <span>Duplicar</span>
           </button>
 
-          {/* Dropdown de Ventas Pendientes */}
           <div className="relative">
             <button 
               onClick={() => setIsOpen(!isOpen)}

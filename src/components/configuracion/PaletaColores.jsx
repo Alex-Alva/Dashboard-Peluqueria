@@ -12,8 +12,6 @@ export default function PaletaColores({ colorFondo, setColorFondo, colorBoton, s
           Paleta de Colores
         </h2>
       </div>
-
-      {/* Color de Fondo */}
       <div className="mb-6">
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Color de Fondo Principal
@@ -39,8 +37,6 @@ export default function PaletaColores({ colorFondo, setColorFondo, colorBoton, s
           ))}
         </div>
       </div>
-
-      {/* Color de Botones */}
       <div className="mb-6">
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Estilo de Botones
@@ -65,8 +61,6 @@ export default function PaletaColores({ colorFondo, setColorFondo, colorBoton, s
           ))}
         </div>
       </div>
-
-      {/* Color de Acentos */}
       <div>
         <label className="block text-sm font-semibold text-slate-700 dark:text-gray-300 mb-3">
           Color de Acentos

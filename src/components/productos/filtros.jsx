@@ -26,7 +26,6 @@ const FilterBar = ({ filters, setFilters }) => {
                     border-x border-b border-purple-950/20 dark:border-purple-950/40
                     transition-colors duration-200">
 
-      {/* BUSCADOR */}
       <div className="relative flex-grow max-w-xs min-w-[240px]">
         <label className={labelClasses}>Buscar</label>
         <span className="absolute left-3.5 top-[39px] text-slate-600 dark:text-purple-400/60 pointer-events-none">
@@ -41,7 +40,6 @@ const FilterBar = ({ filters, setFilters }) => {
         />
       </div>
 
-      {/* STOCK */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[120px] max-w-[140px]">
         <label className={labelClasses}>Stock ≤</label>
         <span className="absolute left-3.5 top-[39px] text-slate-600 dark:text-purple-400/60 pointer-events-none">
@@ -57,7 +55,6 @@ const FilterBar = ({ filters, setFilters }) => {
         />
       </div>
 
-      {/* PRECIO */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[150px]">
         <label className={labelClasses}>Precio</label>
         <span className="absolute left-3.5 top-[39px] text-slate-600 dark:text-purple-400/60 pointer-events-none">
@@ -80,7 +77,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </span>
       </div>
 
-      {/* ESTADO */}
       <div className="relative flex-grow md:flex-grow-0 min-w-[130px]">
         <label className={labelClasses}>Estado</label>
         <span className="absolute left-3.5 top-[39px] text-slate-600 dark:text-purple-400/60 pointer-events-none">
@@ -100,7 +96,6 @@ const FilterBar = ({ filters, setFilters }) => {
         </span>
       </div>
 
-      {/* LIMPIAR FILTROS */}
       <button 
         onClick={() => setFilters({ nombre: '', stock: '', precio: '', estado: '' })}
         className="flex items-center justify-center gap-2 px-5 py-3 border border-purple-600/30 rounded-xl text-sm font-bold text-purple-600 dark:text-purple-400 hover:bg-purple-600/10 active:scale-95 transition-all ml-auto w-full sm:w-auto"

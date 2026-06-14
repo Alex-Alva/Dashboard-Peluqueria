@@ -1,6 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-
-// === DATOS SIMULADOS (MOCK DATA) ===
 const MOCK_CLIENTES = [
   { id: 1, nombre: "Valeria Mendoza" },
   { id: 2, nombre: "Carlos Torres" },
@@ -17,12 +15,10 @@ const MOCK_SERVICIOS = [
 ];
 
 const MOCK_CITAS = [
-  // Simulamos que hoy ya hay dos bloques de horas ocupadas
   { fecha: new Date().toISOString().split('T')[0], hora_inicio: "10:00", duracion_minutos: 60, estado: "Confirmada" },
   { fecha: new Date().toISOString().split('T')[0], hora_inicio: "14:30", duracion_minutos: 90, estado: "En espera" },
 ];
 
-// Helper fuera del hook para no recrearlo en cada render
 const generarHoras = () => {
   const horas = [];
   for (let h = 8; h <= 20; h++) {
@@ -54,34 +50,27 @@ export const useFormularioCita = (isOpen, onClose) => {
     descripcion: '',
     estado: 'Pendiente'
   });
-
-  // Carga inicial local
   useEffect(() => {
     if (isOpen) {
       obtenerClientes();
       obtenerServicios();
     }
   }, [isOpen]);
-
-  // Actualizar disponibilidad cuando cambia la fecha
   useEffect(() => {
     if (formData.fecha) obtenerHorasOcupadas();
   }, [formData.fecha]);
 
   const obtenerClientes = () => {
-    // Simula el ordenamiento alfabético por nombre
     const ordenados = [...MOCK_CLIENTES].sort((a, b) => a.nombre.localeCompare(b.nombre));
     setClientes(ordenados);
   };
 
   const obtenerServicios = () => {
-    // Filtra los servicios activos (estado === true)
     const activos = MOCK_SERVICIOS.filter(s => s.estado === true);
     setServicios(activos);
   };
 
   const obtenerHorasOcupadas = () => {
-    // Filtramos las citas mock que coincidan con la fecha y no estén canceladas
     const citasDelDia = MOCK_CITAS.filter(
       cita => cita.fecha === formData.fecha && cita.estado !== "Cancelada"
     );
@@ -140,16 +129,12 @@ export const useFormularioCita = (isOpen, onClose) => {
     fecha.setMinutes(fecha.getMinutes() + Number(formData.duracionMinutos));
     return fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
   };
-
-  // Guardado puramente local
   const guardarCita = (e) => {
     e.preventDefault();
     if (!formData.clienteId || !formData.servicioId || !formData.horaInicio) {
       alert("Por favor completa los campos obligatorios");
       return;
     }
-
-    // Aquí construirías el objeto final de la cita creada
     const nuevaCita = {
       cliente_id: formData.clienteId,
       servicio_id: formData.servicioId,
@@ -167,7 +152,6 @@ export const useFormularioCita = (isOpen, onClose) => {
     setTimeout(() => {
       onClose();
       setMensaje('');
-      // Reseteamos el formulario a su estado inicial estructurado
       setFormData({
         clienteId: null,
         servicioId: null,

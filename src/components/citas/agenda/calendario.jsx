@@ -39,8 +39,6 @@ const Calendario = ({ selectedDate, onSelectDate }) => {
 
   return (
     <div className="bg-white dark:bg-[#121016] p-4 rounded-xl shadow-xl w-80 border border-gray-200 dark:border-purple-950/40">
-      
-      {/* HEADER */}
       <div className="flex items-center justify-between mb-3">
         <button
           onClick={prevMonth}
@@ -60,15 +58,11 @@ const Calendario = ({ selectedDate, onSelectDate }) => {
           <ChevronRight size={18} />
         </button>
       </div>
-
-      {/* DÍAS SEMANA */}
       <div className="grid grid-cols-7 text-center text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
         {diasSemana.map((d) => (
           <div key={d}>{d}</div>
         ))}
       </div>
-
-      {/* DÍAS */}
       <div className="grid grid-cols-7 text-center text-sm gap-1">
         {dias.map((d, index) => {
           if (!d) {

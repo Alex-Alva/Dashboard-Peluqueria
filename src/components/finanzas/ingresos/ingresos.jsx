@@ -20,8 +20,7 @@ import {
   toLocalDateString
 } from '../../../common/utils';
 
-// Función auxiliar rápida para simular la fecha de hoy en formato local YYYY-MM-DD
-const hoyLocal = new Date().toLocaleDateString('sv-SE'); // 'sv-SE' devuelve YYYY-MM-DD limpiamente
+const hoyLocal = new Date().toLocaleDateString('sv-SE');
 
 const MOCK_INGRESOS = [
   {
@@ -29,7 +28,6 @@ const MOCK_INGRESOS = [
     tipo: 'Efectivo',
     descripcion: 'Corte de cabello y barba premium',
     monto: 75.00,
-    // Eliminamos el .toISOString() y la "Z" del final para que se mantenga en zona local
     fecha: `${hoyLocal}T10:30:00`,
     codigo_venta: 'V-001',
     ventas: {
@@ -91,18 +89,12 @@ const Ingresos = () => {
   );
   const [filtroTipo, setFiltroTipo] = useState('Todos');
   const [filtroMetodo, setFiltroMetodo] = useState('Todos');
-
-  // ESTADOS PARA EL MODAL DE INGRESO EXTRA
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [nuevoMonto, setNuevoMonto] = useState('');
   const [nuevaDesc, setNuevaDesc] = useState('');
   const [nuevoMetodo, setNuevoMetodo] = useState('Efectivo');
-
-  // ESTADOS PARA EL MODAL DE VER DETALLE
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [selectedIngreso, setSelectedIngreso] = useState(null);
-
-  // ESTADOS PARA EL MODAL DE EDICIÓN
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editId, setEditId] = useState(null);
   const [editMonto, setEditMonto] = useState('');
@@ -136,7 +128,7 @@ const handleSaveIngresoExtra = (e) => {
   if (!nuevoMonto || parseFloat(nuevoMonto) <= 0) return;
 
   const hoyLocal = new Date().toLocaleDateString('sv-SE');
-  const horaLocal = new Date().toLocaleTimeString('es-PE', { hour12: false }); // "HH:MM:SS"
+  const horaLocal = new Date().toLocaleTimeString('es-PE', { hour12: false });
 
   const nuevoRegistro = {
     id: Date.now(),
@@ -266,7 +258,6 @@ const handleSaveIngresoExtra = (e) => {
 
   return (
     <div className="animate-fadeIn text-slate-600 dark:text-purple-100/80">
-      {/* Header interno */}
       <header className="flex justify-between items-center mb-10">
         <h2 className="text-2xl font-light tracking-widest uppercase text-slate-900 dark:text-white">
           Flujo de Ingresos <span className="text-purple-600 dark:text-purple-500">|</span>
@@ -281,7 +272,6 @@ const handleSaveIngresoExtra = (e) => {
         </button>
       </header>
 
-      {/* Cards Dinámicas */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {[
           { label: 'Monto Total', value: totales.total, icon: Wallet },
@@ -306,7 +296,6 @@ const handleSaveIngresoExtra = (e) => {
         ))}
       </div>
 
-      {/* Filtros */}
       <div className="bg-white dark:bg-[#121016]/60 dark:backdrop-blur-md p-6 mb-8 rounded-sm shadow-xs border border-slate-200 dark:border-purple-950/40 transition-colors">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
           <div>
@@ -360,7 +349,6 @@ const handleSaveIngresoExtra = (e) => {
         </div>
       </div>
 
-      {/* Tabla Conectada */}
       <div className="bg-white dark:bg-[#121016]/60 dark:backdrop-blur-md rounded-sm overflow-hidden shadow-xs border border-slate-200 dark:border-purple-950/40 transition-colors">
         {loading ? (
           <div className="p-10 text-center uppercase tracking-widest text-xs text-slate-400 dark:text-purple-400/40">Cargando base de datos simulada...</div>
@@ -441,7 +429,6 @@ const handleSaveIngresoExtra = (e) => {
         )}
       </div>
 
-      {/* MODAL INGRESO EXTRA */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-[#121016]/60 backdrop-blur-md flex justify-center items-center z-50 animate-fadeIn">
           <div className="bg-white dark:bg-[#121016]/80 dark:backdrop-blur-md w-full max-w-md p-6 border border-slate-200 dark:border-purple-950/40 shadow-2xl rounded-xs text-slate-800 dark:text-purple-100">
@@ -510,7 +497,6 @@ const handleSaveIngresoExtra = (e) => {
         </div>
       )}
 
-      {/* MODAL EDICIÓN */}
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-[#121016]/60 backdrop-blur-md flex justify-center items-center z-50 animate-fadeIn">
           <div className="bg-white dark:bg-[#121016]/80 dark:backdrop-blur-md w-full max-w-md p-6 border border-slate-200 dark:border-purple-950/40 shadow-2xl rounded-xs text-slate-800 dark:text-purple-100">
@@ -595,7 +581,6 @@ const handleSaveIngresoExtra = (e) => {
         </div> 
       )}
 
-      {/* MODAL DETALLE ESPECÍFICO DEL INGRESO */}
       {isDetailModalOpen && selectedIngreso && (
         <div className="fixed inset-0 bg-[#121016]/70 backdrop-blur-md flex justify-center items-center z-50 animate-fadeIn">
           <div className="bg-white dark:bg-[#121016]/80 dark:backdrop-blur-md w-full max-w-md p-6 border border-slate-200 dark:border-purple-950/40 shadow-2xl rounded-sm text-slate-800 dark:text-purple-100">

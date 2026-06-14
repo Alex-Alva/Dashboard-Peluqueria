@@ -14,8 +14,6 @@ const ClientesHeader = ({ onOpenModal }) => {
             Gestión de Clientes
           </h2>
         </div>
-
-        {/* BOTÓN NUEVO CLIENTE (CON GRADIENTE NEÓN SOLICITADO) */}
         <button 
           onClick={onOpenModal}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-purple-700 to-indigo-600 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-lg shadow-purple-500/10 hover:shadow-purple-500/20 hover:brightness-110 active:scale-[0.98]"
