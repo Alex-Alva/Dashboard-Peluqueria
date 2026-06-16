@@ -10,3 +10,6 @@ lerna-debug.log*
 node_modules
 dist
 *.local
+.firebase/
+.github/workflows/
+.firebaserc
