@@ -12,7 +12,6 @@ import Citas from "./pages/citas";
 import FinanzasGeneral from "./pages/finanzas";
 import HistoryGeneral from "./pages/historial";
 import Dashboard from "./pages/dashboard";
-import Configuracion from "./pages/configuracion";
 import { motion } from "framer-motion";
 
 function AppContent() {
