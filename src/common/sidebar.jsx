@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  LayoutDashboard,ShoppingCart,Scissors,Package,Users,Calendar, History,DollarSign,Settings,Sun, Moon,LogOut
+  LayoutDashboard,ShoppingCart,Scissors,Package,Users,Calendar, History,DollarSign,Sun, Moon,LogOut
 } from "lucide-react";
 import logo1 from "../assets/Logo1.png";
 import logo2 from "../assets/Logo2.png";
@@ -18,7 +18,6 @@ const menuItems = [
   { name: "Citas", icon: Calendar, path: "/citas" },
   { name: "Finanzas", icon: DollarSign, path: "/finanzas" },
   { name: "Historial", icon: History, path: "/historial" },
-  { name: "Configuración", icon: Settings, path: "/configuracion"},
 ];
 
 export default function Sidebar({ isOpen, setIsOpen }) {

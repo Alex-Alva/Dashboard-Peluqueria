@@ -48,7 +48,6 @@ function AppContent() {
             <Route path="/citas" element={<Citas />} />
             <Route path="/finanzas" element={<FinanzasGeneral />} />
             <Route path="/historial" element={<HistoryGeneral />} />
-            <Route path="/configuracion" element={<Configuracion/>} />
           </Routes>
         </motion.div>
       </div>
