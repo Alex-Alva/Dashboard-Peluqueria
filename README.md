@@ -1,16 +1,41 @@
-# React + Vite
+# Modern Beauty Salon Management Dashboard - React 19 & Tailwind CSS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido! Esta es una plantilla frontend premium, moderna y totalmente interactiva diseñada para la gestión integral de salones de belleza, peluquerías y centros de estética. Construida con una arquitectura de componentes limpios, escalables y listos para ser integrados con cualquier API o servicio backend.
 
-Currently, two official plugins are available:
+## Stack Tecnológico
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+*   **Core:** React 19 (Estructura de componentes limpios en `.jsx`)
+*   **Enrutamiento:** React Router 7 (Navegación fluida SPA)
+*   **Diseño y Estilos:** Tailwind CSS v4 con arquitectura de diseño premium
+*   **Métricas y Gráficos:** Recharts para el monitoreo visual de ingresos y estadísticas
+*   **Animaciones:** Framer Motion para transiciones suaves e interacciones de UI
+*   **Iconografía:** Lucide React para un set de iconos limpio y consistente
+*   **Documentos:** @react-pdf/renderer para la generación dinámica de boletas en PDF
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Características Principales (Frontend Ready)
 
-## Expanding the ESLint configuration
+*   **Diseño Dual (Modo Visual):** Soporte nativo para Modo Oscuro Premium y Modo Claro con un solo clic.
+*   **Punto de Venta Interactivo (POS):** Simulación completa de flujo de venta con selección de servicios/productos y Clientes.
+*   **Gestión Financiera y Caja:** Vistas detalladas para cierres de caja diarios, arqueo, inspección de canales de pago y alertas visuales de discrepancias de dinero.
+*   **Módulo de Auditoría Histórica:** Tablas de historial de movimientos con filtros avanzados por fechas y estados.
+*   **Agenda y Citas Dinámica:** Vista de calendario semanal interactivo para el control estricto de citas y estatus de atención a clientes.
+*   **Generación de Boletas:** Integración lista para descargar comprobantes de pago optimizados en formato PDF.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Instalación y Despliegue Local
+
+Sigue estos pasos para ejecutar el proyecto en tu entorno de desarrollo local:
+
+1.  **Descomprimir el archivo:** Extrae el contenido del paquete `.zip` en tu directorio de trabajo.
+2.  **Instalar dependencias:** Abre tu terminal en la raíz del proyecto y ejecuta:
+```bash
+    npm install
+    ```
+3.  **Iniciar servidor de desarrollo:** Corre el siguiente comando para levantar el proyecto con Vite:
+```bash
+    npm run dev
+    ```
+4.  **Ver el proyecto:** Abre tu navegador e ingresa a la URL local (usualmente `http://localhost:5173`).
